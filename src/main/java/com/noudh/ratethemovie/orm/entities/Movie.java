@@ -14,6 +14,7 @@ public class Movie {
     private String title;
     private String trailerUrl;
     private String imageUrl;
+    @OneToMany
     private List<Review> reviews;
     @ManyToOne
     private User user;
@@ -21,7 +22,10 @@ public class Movie {
     private Person director;
     @ManyToMany
     private List<Person> actors;
-    @ManyToMany
+    @ElementCollection(targetClass = Genre.class)
+    @JoinTable(name = "Genres", joinColumns = @JoinColumn(name = "movieId"))
+    @Column(name = "genre", nullable = false)
+    @Enumerated(EnumType.STRING)
     private List<Genre> genres;
 
     public Movie(String title, String trailerUrl, String imageUrl, List<Review> reviews, User user, Person director, List<Person> actors, List<Genre> genres) {

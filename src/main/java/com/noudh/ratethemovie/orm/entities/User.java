@@ -13,7 +13,7 @@ public class User {
     private Long id;
     private String username;
     private String password;
-    @ManyToMany
+    @OneToMany
     private List<Review> reviews;
     @OneToMany
     private List<Movie> movies;
