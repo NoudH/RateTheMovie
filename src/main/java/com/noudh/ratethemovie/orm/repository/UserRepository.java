@@ -1,11 +1,9 @@
 package com.noudh.ratethemovie.orm.repository;
 
 import com.noudh.ratethemovie.orm.entities.User;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<User, Long> {
 
-    Page<User> findByUsername(String username, Pageable pageable);
+    User findByUsername(String username);
 }

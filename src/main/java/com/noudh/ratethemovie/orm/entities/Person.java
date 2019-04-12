@@ -1,5 +1,7 @@
 package com.noudh.ratethemovie.orm.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.noudh.ratethemovie.models.EmploymentJob;
 
 import javax.persistence.*;
@@ -12,12 +14,19 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String name;
+
     private String imageUrl;
+
     private Date dateOfBirth;
-    @ManyToMany
+
+    @ManyToMany(mappedBy = "actors")
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     private List<Movie> movies;
+
     private EmploymentJob employmentJob;
+
     private String description;
 
     public Person(String name, String imageUrl, Date dateOfBirth, List<Movie> movies, EmploymentJob employmentJob, String description) {

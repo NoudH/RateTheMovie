@@ -1,6 +1,7 @@
 package com.noudh.ratethemovie.orm.entities;
 
-import com.noudh.ratethemovie.models.Genre;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,27 +12,37 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String title;
+
     private String trailerUrl;
+
     private String imageUrl;
-    @OneToMany
+
+    private Integer releaseYear;
+
+    @OneToMany(mappedBy = "movie")
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     private List<Review> reviews;
+
     @ManyToOne
     private User user;
+
     @ManyToOne
     private Person director;
-    @ManyToMany
-    private List<Person> actors;
-    @ElementCollection(targetClass = Genre.class)
-    @JoinTable(name = "Genres", joinColumns = @JoinColumn(name = "movieId"))
-    @Column(name = "genre", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private List<Genre> genres;
 
-    public Movie(String title, String trailerUrl, String imageUrl, List<Review> reviews, User user, Person director, List<Person> actors, List<Genre> genres) {
+    @ManyToMany
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    private List<Person> actors;
+
+    @ManyToMany(mappedBy = "movies")
+    private List<GenreEntity> genres;
+
+    public Movie(String title, String trailerUrl, String imageUrl, Integer releaseYear, List<Review> reviews, User user, Person director, List<Person> actors, List<GenreEntity> genres) {
         this.title = title;
         this.trailerUrl = trailerUrl;
         this.imageUrl = imageUrl;
+        this.releaseYear = releaseYear;
         this.reviews = reviews;
         this.user = user;
         this.director = director;
@@ -101,11 +112,19 @@ public class Movie {
         this.actors = actors;
     }
 
-    public List<Genre> getGenres() {
+    public List<GenreEntity> getGenres() {
         return genres;
     }
 
-    public void setGenres(List<Genre> genres) {
+    public void setGenres(List<GenreEntity> genres) {
         this.genres = genres;
+    }
+
+    public Integer getReleaseYear() {
+        return releaseYear;
+    }
+
+    public void setReleaseYear(Integer releaseYear) {
+        this.releaseYear = releaseYear;
     }
 }

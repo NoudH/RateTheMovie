@@ -1,5 +1,6 @@
 package com.noudh.ratethemovie.orm.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.noudh.ratethemovie.models.UserRole;
 
 import javax.persistence.*;
@@ -10,21 +11,34 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
     private Long id;
+
     private String username;
+
+    @JsonIgnore
     private String password;
-    @OneToMany
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Review> reviews;
+
     @OneToMany
     private List<Movie> movies;
+
+    @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
-    public User(String username, String password, List<Review> reviews, List<Movie> movies, UserRole userRole) {
+    @JsonIgnore
+    private Boolean enabled;
+
+    public User(String username, String password, List<Review> reviews, List<Movie> movies, UserRole userRole, Boolean enabled) {
         this.username = username;
         this.password = password;
         this.reviews = reviews;
         this.movies = movies;
         this.userRole = userRole;
+        this.enabled = enabled;
     }
 
     public User() { }
@@ -71,5 +85,13 @@ public class User {
 
     public void setUserRole(UserRole userRole) {
         this.userRole = userRole;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }

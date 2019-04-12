@@ -1,7 +1,6 @@
 package com.noudh.ratethemovie.models;
 
 public enum  UserRole {
-    USER,
-    ADMIN,
-    GUEST
+    ROLE_USER,
+    ROLE_ADMIN
 }
