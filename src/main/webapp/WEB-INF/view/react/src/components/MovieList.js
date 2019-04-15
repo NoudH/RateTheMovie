@@ -4,7 +4,7 @@ import MovieListItem from "./MovieListItem";
 
 class MyComponent extends Component {
     render() {
-        const movies = this.props.movies.map(movie => <MovieListItem movie={movie}/>);
+        const movies = this.props.movies.map(movie => <MovieListItem key={movie.id} movie={movie}/>);
         return (
             <div>
                 {movies}

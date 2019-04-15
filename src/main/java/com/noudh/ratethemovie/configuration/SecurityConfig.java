@@ -40,10 +40,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/index*", "/static/**", "/*.js", "/*.json", "/*.ico")
                 .permitAll()
                 .and()
-                .formLogin().loginPage("/index.html")
+                .formLogin().loginPage("/login.html")
                 .loginProcessingUrl("/perform_login")
-                .defaultSuccessUrl("/homepage.html",false)
-                .failureUrl("/index.html?error=true");
+                .defaultSuccessUrl("/index.html",false)
+                .failureUrl("/login.html?error=true");
     }
 
     @Override

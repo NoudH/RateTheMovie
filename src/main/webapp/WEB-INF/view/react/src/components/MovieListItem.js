@@ -6,7 +6,7 @@ class MovieListItem extends Component {
         return (
             <div id={"wrapper"}>
                 <div id={"imageholder"}>
-                    <img src={this.props.movie.image}/>
+                    <img src={this.props.movie.imageUrl}/>
                 </div>
                 <div id={"movieDetails"}>
                     

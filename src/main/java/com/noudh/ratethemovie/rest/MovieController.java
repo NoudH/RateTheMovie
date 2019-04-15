@@ -52,11 +52,11 @@ public class MovieController {
 
     @GetMapping(value = "/findByReleaseYear", produces = "application/json")
     public Page<Movie> findMovieByReleaseYear(@RequestParam int page, @RequestParam int size, @RequestParam Integer year) {
-        return movieRepository.findByReleaseYear(year, PageRequest.of(page, size, Sort.Direction.DESC));
+        return movieRepository.findByReleaseYear(year, PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "releaseYear")));
     }
 
     @GetMapping(value = "/all", produces = "application/json")
     public Page<Movie> findMovieByReleaseYear(@RequestParam int page, @RequestParam int size) {
-        return movieRepository.findAll(PageRequest.of(page, size, Sort.Direction.DESC));
+        return movieRepository.findAll(PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "releaseYear")));
     }
 }

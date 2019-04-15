@@ -1,31 +1,15 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import './index.css'
-import Form from './components/Form'
-
-const inputs = [{
-    name: "username",
-    placeholder: "username",
-    type: "text"
-},{
-    name: "password",
-    placeholder: "password",
-    type: "password"
-},{
-    type: "submit",
-    value: "Submit",
-    className: "btn"
-}]
-
-const props = {
-    name: 'loginForm',
-    method: 'POST',
-    action: '/perform_login',
-    inputs: inputs
-}
-
-const params = new URLSearchParams(window.location.search)
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import App from "./App";
+import Login from "./login";
 
 ReactDOM.render(
-    <Form {...props} error={params.get('error')} />,
-    document.getElementById('container'))
+    <Router>
+        <Route path="/" component={App}/>
+        <Route path="/index" component={App} />
+        <Route path="/login" component={Login} />
+    </Router>,
+    document.getElementById('container')
+);
