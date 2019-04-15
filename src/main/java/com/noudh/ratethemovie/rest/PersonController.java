@@ -9,7 +9,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/api/person")
 public class PersonController {
     private final PersonRepository personRepository;
 

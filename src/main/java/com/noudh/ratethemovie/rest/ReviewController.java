@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
 @RestController
-@RequestMapping("/review")
+@RequestMapping("/api/review")
 public class ReviewController {
     private final UserRepository userRepository;
     private final ReviewRepository reviewRepository;

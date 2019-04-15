@@ -4,16 +4,14 @@ import Input from './Input'
 
 class Form extends Component {
 
-    //...
-
     render() {
         const inputs = this.props.inputs.map(
             ({name, placeholder, type, value, className}, index) => (
                 <Input key={index} name={name} placeholder={placeholder} type={type} value={value}
                        className={type==='submit'? className : ''} handleError={this.handleError} />
             )
-        )
-        const errors = this.renderError()
+        );
+        const errors = this.renderError();
         return (
             <form {...this.props} onSubmit={this.handleSubmit} ref={fm => {this.form=fm}} >
                 {inputs}
@@ -23,7 +21,7 @@ class Form extends Component {
     }
 
     constructor(props) {
-        super(props)
+        super(props);
         if(props.error) {
             this.state = {
                 failure: 'wrong username or password!',
@@ -35,7 +33,7 @@ class Form extends Component {
     }
 
     handleError = (field, errmsg) => {
-        if(!field) return
+        if(!field) return;
 
         if(errmsg) {
             this.setState((prevState) => ({
@@ -50,20 +48,20 @@ class Form extends Component {
                 errmsgs: {...prevState.errmsgs, [field]: ''}
             }))
         }
-    }
+    };
 
     renderError = () => {
         if(this.state.errcount || this.state.failure) {
             const errmsg = this.state.failure
-                || Object.values(this.state.errmsgs).find(v=>v)
+                || Object.values(this.state.errmsgs).find(v=>v);
             return <div className="error">{errmsg}</div>
         }
-    }
+    };
 
     handleSubmit = (event) => {
-        event.preventDefault()
+        event.preventDefault();
         if(!this.state.errcount) {
-            const data = new FormData(this.form)
+            const data = new FormData(this.form);
             fetch(this.form.action, {
                 method: this.form.method,
                 body: new URLSearchParams(data)
@@ -82,6 +80,6 @@ Form.propTypes = {
     method: PropTypes.string,
     inputs: PropTypes.array,
     error: PropTypes.string
-}
+};
 
 export default Form

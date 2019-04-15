@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 class Input extends Component {
     constructor(props){
-        super(props)
+        super(props);
         this.state = {
             value: props.value? props.value : '',
             className: props.className? props.className : '',
@@ -12,15 +12,15 @@ class Input extends Component {
     }
 
     render () {
-        const {handleError, ...opts} = this.props
-        this.handleError = handleError
+        const {handleError, ...opts} = this.props;
+        this.handleError = handleError;
         return (
             <input {...opts} value={this.state.value} onChange={this.inputChange} className={this.state.className} />
         )
     }
 
     inputChange = (event) => {
-        const value = event.target.value, name = event.target.name
+        const value = event.target.value, name = event.target.name;
         this.setState({ value: value })
     }
 }
@@ -32,6 +32,6 @@ Input.propTypes = {
     className: PropTypes.string,
     value: PropTypes.string,
     handleError: PropTypes.func
-}
+};
 
 export default Input
