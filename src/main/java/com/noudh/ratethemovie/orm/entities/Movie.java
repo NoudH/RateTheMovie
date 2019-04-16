@@ -19,6 +19,9 @@ public class Movie {
 
     private String imageUrl;
 
+    @Column(length = 100000)
+    private String description;
+
     private Integer releaseYear;
 
     @OneToMany(mappedBy = "movie")
@@ -38,10 +41,11 @@ public class Movie {
     @ManyToMany(mappedBy = "movies")
     private List<GenreEntity> genres;
 
-    public Movie(String title, String trailerUrl, String imageUrl, Integer releaseYear, List<Review> reviews, User user, Person director, List<Person> actors, List<GenreEntity> genres) {
+    public Movie(String title, String trailerUrl, String imageUrl, String description, Integer releaseYear, List<Review> reviews, User user, Person director, List<Person> actors, List<GenreEntity> genres) {
         this.title = title;
         this.trailerUrl = trailerUrl;
         this.imageUrl = imageUrl;
+        this.description = description;
         this.releaseYear = releaseYear;
         this.reviews = reviews;
         this.user = user;
@@ -126,5 +130,13 @@ public class Movie {
 
     public void setReleaseYear(Integer releaseYear) {
         this.releaseYear = releaseYear;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

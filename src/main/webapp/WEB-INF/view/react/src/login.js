@@ -28,7 +28,11 @@ const params = new URLSearchParams(window.location.search);
 class Login extends React.Component {
     render() {
         return (
-            <Form {...props} error={params.get('error')} />
+            <div id={"loginRoot"}>
+                <div id={"container"}>
+                    <Form {...props} error={params.get('error')} />
+                </div>
+            </div>
         );
     }
 }
