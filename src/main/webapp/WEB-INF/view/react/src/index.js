@@ -7,9 +7,9 @@ import Login from "./login";
 
 ReactDOM.render(
     <Router>
-        <Route path="/" component={App}/>
+        <Route path="/" exact component={App}/>
         <Route path="/index" component={App} />
         <Route path="/login" component={Login} />
     </Router>,
-    document.getElementById('container')
+    document.getElementById('root')
 );

@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import MovieList from "./components/MovieList";
 import Axios from "axios"
+import NavigationBar from "./components/NavigationBar";
+import 'bootstrap/dist/css/bootstrap.css';
 
 class App extends Component {
 
@@ -23,9 +25,10 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <MovieList movies={this.state.movies}/>
-      </div>
+        <div className="App">
+            <NavigationBar/>
+            <MovieList movies={this.state.movies}/>
+        </div>
     );
   }
 }
