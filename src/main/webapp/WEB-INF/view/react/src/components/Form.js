@@ -67,6 +67,7 @@ class Form extends Component {
                 body: new URLSearchParams(data)
             })
                 .then(v => {
+                    console.log(v);
                     if(v.redirected) window.location = v.url
                 })
                 .catch(e => console.warn(e))

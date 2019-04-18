@@ -26,7 +26,7 @@ public class UserController {
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping(value = "/login", produces = "application/json")
     public void login(HttpServletResponse response) throws IOException {
-        response.sendRedirect("http://localhost:8080/");
+        response.sendRedirect("http://localhost:3000/");
     }
 
     @PostMapping(value = "/register", consumes = "application/json", produces = "application/json")

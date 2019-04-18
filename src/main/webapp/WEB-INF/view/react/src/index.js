@@ -9,7 +9,6 @@ ReactDOM.render(
     <Router>
         <Route path="/" exact component={App}/>
         <Route path="/index" component={App} />
-        <Route path="/login" component={Login} />
     </Router>,
     document.getElementById('root')
 );
