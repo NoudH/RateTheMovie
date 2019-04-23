@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Navbar, Nav, NavDropdown} from 'react-bootstrap'
 import PropTypes from 'prop-types';
-import Axios from "axios";
 import * as jwtDecoder from 'jwt-decode';
+import {Link} from 'react-router-dom';
 
 class NavigationBar extends Component {
     render() {
@@ -17,7 +17,7 @@ class NavigationBar extends Component {
                 </Navbar.Collapse>
                 <Navbar.Collapse className="justify-content-end">
                     <Navbar.Text>
-                        {window.localStorage.getItem("jwt") !== undefined ? <a href="/login">Signed in as: {jwtDecoder(window.localStorage.getItem("jwt")).sub}</a> : <a href="/login">Login</a>}
+                        {window.localStorage.getItem("jwt") !== null ? <Link to="/login">Signed in as: {jwtDecoder(window.localStorage.getItem("jwt")).sub}</Link> : <Link to="/login">Login</Link>}
                     </Navbar.Text>
                 </Navbar.Collapse>
             </Navbar>

@@ -1,0 +1,13 @@
+.comment{
+    margin: 0;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.comment:nth-child(even){
+    background-color: #dddddd;
+}
+
+.ActorRow{
+    height: 150px;
+}

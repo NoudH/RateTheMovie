@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import StarRatings from 'react-star-ratings'
+import {Link} from 'react-router-dom';
 
 class MovieListItem extends Component {
     render() {
@@ -11,7 +12,7 @@ class MovieListItem extends Component {
                         <img src={this.props.movie.imageUrl} className={"img-fluid"} alt={this.props.movie.title}/>
                     </div>
                     <div id={"movieDetails"} className={"col-md-6"}>
-                        <h2 className={"text-left mb-0"}>{this.props.movie.title}</h2>
+                        <Link to={"/movie?id=" + this.props.movie.id}><h2 className={"text-left mb-0"}>{this.props.movie.title}</h2></Link>
                         <StarRatings
                             rating={this.props.movie.reviews !== undefined ? this.props.movie.reviews.flatMap(review => review.rating).reduce((a,b) => a + b, 0) / this.props.movie.reviews.length : 1}
                             starRatedColor="yellow"
