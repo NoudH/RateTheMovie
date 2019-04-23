@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Input from './Input'
+import Axios from "axios"
 
 class Form extends Component {
 
@@ -8,7 +9,7 @@ class Form extends Component {
         const inputs = this.props.inputs.map(
             ({name, placeholder, type, value, className}, index) => (
                 <Input key={index} name={name} placeholder={placeholder} type={type} value={value}
-                       className={type==='submit'? className : ''} handleError={this.handleError} />
+                       className={type==='submit'? className : ''} handleError={this.handleError}/>
             )
         );
         const errors = this.renderError();
@@ -60,17 +61,24 @@ class Form extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
+        const data = new FormData(this.form);
+        var object = {};
+        data.forEach(function(value, key){
+            object[key] = value;
+        });
+        var json = JSON.stringify(object);
+        console.log(json);
         if(!this.state.errcount) {
-            const data = new FormData(this.form);
-            fetch(this.form.action, {
-                method: this.form.method,
-                body: new URLSearchParams(data)
+            fetch(this.props.action, {
+                method: this.props.method,
+                body: json,
+                headers: {
+                    'Content-Type': "application/json"
+                }
             })
-                .then(v => {
-                    console.log(v);
-                    if(v.redirected) window.location = v.url
-                })
-                .catch(e => console.warn(e))
+                .then(res => res.json())
+                .then(data => {console.log(data); window.localStorage.setItem("jwt", data.token)})
+                .then(() => window.location = "/index")
         }
     }
 }

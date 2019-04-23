@@ -22,7 +22,7 @@ class Input extends Component {
     inputChange = (event) => {
         const value = event.target.value, name = event.target.name;
         this.setState({ value: value })
-    }
+    };
 }
 
 Input.propTypes = {

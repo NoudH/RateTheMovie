@@ -22,6 +22,8 @@ public class MvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("/WEB-INF/view/react/build/");
         registry.addResourceHandler("/index.html")
                 .addResourceLocations("/WEB-INF/view/react/build/index.html");
+        registry.addResourceHandler("/login.html")
+                .addResourceLocations("/WEB-INF/view/react/build/login.html");
     }
 
     @Override

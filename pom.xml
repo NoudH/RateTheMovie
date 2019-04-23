@@ -70,6 +70,32 @@
             <artifactId>spring-data-rest-core</artifactId>
             <version>3.0.8.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-jwt</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security.extensions</groupId>
+            <artifactId>spring-security-saml2-core</artifactId>
+            <version>1.0.9.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>0.10.5</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>0.10.5</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>0.10.5</version>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -77,6 +103,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <addResources>true</addResources>
+                </configuration>
             </plugin>
             <!--<plugin>
                 <groupId>com.github.eirslett</groupId>
@@ -113,5 +142,4 @@
             </plugin>-->
         </plugins>
     </build>
-
 </project>

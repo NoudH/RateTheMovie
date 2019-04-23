@@ -5,11 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
@@ -24,6 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final DataSource dataSource;
     private final UserRepository userRepository;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Value("${spring.queries.users-query}")
     private String usersQuery;
@@ -32,21 +34,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private String rolesQuery;
 
     @Autowired
-    public SecurityConfig(DataSource dataSource, UserRepository userRepository) {
+    public SecurityConfig(DataSource dataSource, UserRepository userRepository, JwtTokenProvider jwtTokenProvider) {
         this.dataSource = dataSource;
         this.userRepository = userRepository;
+        this.jwtTokenProvider = jwtTokenProvider;
     }
 
     @Override
     protected void configure(final HttpSecurity http ) throws Exception {
-        http.cors().and().csrf().disable().authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/index*", "/static/**", "/*.js", "/*.json", "/*.ico")
-                .permitAll()
+        http.cors().and()
+                .httpBasic().disable()
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .formLogin().loginPage("http://localhost:3000/login.html")
-                .loginProcessingUrl("/perform_login")
-                .defaultSuccessUrl("http://localhost:3000/index.html",false)
-                .failureUrl("http://localhost:3000/login.html?error=true");
+                .authorizeRequests()
+                .antMatchers("/api/user/login").permitAll()
+                .and()
+                .apply(new JwtConfigurer(jwtTokenProvider));
     }
 
     @Override
@@ -71,5 +75,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
         return source;
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 }

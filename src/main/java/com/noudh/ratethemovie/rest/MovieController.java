@@ -34,7 +34,6 @@ public class MovieController {
         return movieRepository.save(movie) != null ? 200 : 500;
     }
 
-    @Secured("ROLE_ADMIN")
     @GetMapping(value = "/findByDirector", params = {"page", "size", "director"}, produces = "application/json")
     public Page<Movie> findMovieByDirector(@RequestParam int page, @RequestParam int size, @RequestParam String director) {
         return movieRepository.findByDirectorName(director, PageRequest.of(page, size));
