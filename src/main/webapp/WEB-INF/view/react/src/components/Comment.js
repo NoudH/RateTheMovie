@@ -6,7 +6,7 @@ class Comment extends Component {
     render() {
         return (
             <div className={"comment"}>
-                <p className={"mb-0 ml-1"}>{this.props.user.username}</p>
+                <p className={"mb-0 ml-1"}>{this.props.user.username} <span className={"text-secondary"}>({new Date(this.props.date).toDateString()})</span></p>
                 <StarRatings
                     rating={this.props.rating}
                     starRatedColor="yellow"

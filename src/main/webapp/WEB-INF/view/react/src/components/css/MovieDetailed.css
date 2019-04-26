@@ -4,7 +4,7 @@
     padding-top: 10px;
 }
 
-.comment:nth-child(even){
+.comment:nth-child(odd){
     background-color: #dddddd;
 }
 

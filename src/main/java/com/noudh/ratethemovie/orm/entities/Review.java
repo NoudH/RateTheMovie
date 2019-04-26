@@ -3,6 +3,7 @@ package com.noudh.ratethemovie.orm.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Review {
@@ -22,11 +23,14 @@ public class Review {
 
     private String comment;
 
-    public Review(Integer rating, User user, Movie movie, String comment) {
+    private Date date;
+
+    public Review(Integer rating, User user, Movie movie, String comment, Date date) {
         this.rating = rating;
         this.user = user;
         this.movie = movie;
         this.comment = comment;
+        this.date = date;
     }
 
     public Review() { }
@@ -65,5 +69,13 @@ public class Review {
 
     public void setMovie(Movie movie) {
         this.movie = movie;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

@@ -25,13 +25,13 @@ class MovieDetailed extends Component {
 
     render() {
         const reviews = this.state.movie.reviews.map(
-            ({id, rating, user, comment}, index) => (
-                <Comment key={index} comment={comment} rating={rating} user={user}/>
+            ({id, rating, user, comment, date}, index) => (
+                <Comment key={index} comment={comment} rating={rating} user={user} date={date}/>
             )
         );
         const actors = this.state.movie.actors.map(
             ({id, dateOfBirth, description, employmentJob, imageUrl, name}, index) => (
-                <Actor key={index} dateOfBirth={dateOfBirth} description={description} employmentJob={employmentJob} imageUrl={imageUrl} name={name}/>
+                <Actor key={index} dateOfBirth={dateOfBirth} description={description} employmentJob={employmentJob} imageUrl={imageUrl} name={name} />
             ));
         return (
             <div>

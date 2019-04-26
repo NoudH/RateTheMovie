@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/api/review")
@@ -28,6 +29,7 @@ public class ReviewController {
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @PostMapping(value = "/", consumes = "application/json", produces = "application/json")
     public Integer postReview(@RequestBody Review review, @RequestParam Long movieid, Principal principal){
+        review.setDate(new Date());
         review.setUser(userRepository.findByUsername(principal.getName()));
         review.setMovie(movieRepository.findById(movieid).orElseThrow(NullPointerException::new));
         return reviewRepository.save(review) != null ? 200 : 500;
