@@ -1,6 +1,6 @@
 import React from 'react'
-import './components/css/Login.css'
-import Form from './components/Form'
+import './css/Login.css'
+import Form from '../components/Form'
 
 const inputs = [{
     name: "username",

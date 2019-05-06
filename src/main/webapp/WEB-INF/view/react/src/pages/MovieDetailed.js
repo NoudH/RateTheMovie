@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Axios from "axios";
-import NavigationBar from "./NavigationBar";
-import Input from "./Form";
-import Comment from "./Comment";
+import NavigationBar from "../components/NavigationBar";
+import Input from "../components/Form";
+import Comment from "../components/Comment";
 import './css/MovieDetailed.css'
-import Actor from "./Actor";
+import Actor from "../components/Actor";
 
 class MovieDetailed extends Component {
     constructor(props) {

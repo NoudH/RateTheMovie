@@ -1,4 +1,9 @@
 .movieContainer{
     height: auto;
+    padding: 10px;
     width: 50%;
+}
+
+.movieContainer:nth-child(odd){
+    background-color: #dddddd;
 }

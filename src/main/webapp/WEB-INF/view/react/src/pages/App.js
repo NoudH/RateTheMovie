@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
-import MovieList from "./components/MovieList";
+import './css/App.css';
+import MovieList from "../components/MovieList";
 import Axios from "axios"
-import NavigationBar from "./components/NavigationBar";
+import NavigationBar from "../components/NavigationBar";
 import 'bootstrap/dist/css/bootstrap.css';
 
 class App extends Component {
