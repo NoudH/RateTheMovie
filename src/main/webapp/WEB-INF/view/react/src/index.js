@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import AddMovie from "./pages/AddMovie";
 import * as jwtDecoder from "jwt-decode";
 
-function isAuth(Router, Role){
+function isAuth(Role){
     return window.localStorage.getItem("jwt") !== null &&
             (jwtDecoder(window.localStorage.getItem("jwt")).roles.includes(Role) ||
             jwtDecoder(window.localStorage.getItem("jwt")).roles.includes("ROLE_ADMIN"))
