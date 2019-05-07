@@ -17,7 +17,7 @@ class MovieListItem extends Component {
                         <div id={"movieDetails"} className={"col-md-6"}>
                             <h2 className={"text-left mb-0"}>{this.props.movie.title}</h2>
                             <StarRatings
-                                rating={this.props.movie.reviews !== undefined ? this.props.movie.reviews.flatMap(review => review.rating).reduce((a, b) => a + b, 0) / this.props.movie.reviews.length : 1}
+                                rating={this.props.movie.reviews.length > 0 ? this.props.movie.reviews.flatMap(review => review.rating).reduce((a, b) => a + b, 0) / this.props.movie.reviews.length : 0}
                                 starRatedColor="yellow"
                                 numberOfStars={5} starDimension={"20px"}
                             />

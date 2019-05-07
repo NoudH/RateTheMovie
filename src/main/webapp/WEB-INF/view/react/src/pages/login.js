@@ -13,7 +13,7 @@ const inputs = [{
 },{
     type: "submit",
     value: "Submit",
-    className: "btn"
+    className: "btn btn-dark"
 }];
 
 const props = {

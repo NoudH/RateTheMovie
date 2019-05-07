@@ -33,4 +33,12 @@ public class PersonController {
     public Page<Person> findPersonByName(@RequestParam String name, @RequestParam int page, @RequestParam int size){
         return personRepository.findByName(name, PageRequest.of(page, size));
     }
+
+    @GetMapping(value = "/searchByName", params = {"name", "page", "size"}, produces = "application/json")
+    public Page<Person> searchPersonByName(@RequestParam String name, @RequestParam int page, @RequestParam int size){
+        return personRepository.findByNameContaining(name, PageRequest.of(page, size));
+    }
+
+
+
 }

@@ -18,4 +18,6 @@ public interface PersonRepository extends PagingAndSortingRepository<Person, Lon
     Page<Person> findByMovies(Movie movie, Pageable pageable);
 
     Page<Person> findAll(Pageable pageable);
+
+    Page<Person> findByNameContaining(String name, Pageable pageable);
 }

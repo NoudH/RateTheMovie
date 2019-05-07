@@ -25,11 +25,8 @@
 input, textarea {
     margin-left: auto;
     margin-right: auto;
+    width: 100%;
     background-color: transparent;
-    border-top: 0;
-    border-right: 0;
-    border-left: 0;
-    border-radius: 0;
     color: #111;
     font-size: 1rem;
     padding: .3rem .5rem;
@@ -39,4 +36,36 @@ input, textarea {
 
 label {
     margin-left: 6px;
+}
+
+#image {
+    width: 100%;
+}
+
+#title{
+    font-size: 2rem;
+}
+
+select {
+    text-transform: capitalize;
+}
+
+option{
+    text-transform: capitalize;
+}
+
+.tag {
+    border: #0074D9 1px solid;
+    border-radius: 5px;
+    background-color: #0074D9;
+    color: white;
+    padding-left: 2px;
+    padding-right: 2px;
+    margin-right: 5px;
+}
+
+.close {
+    font-size: 1.4rem;
+    float: none;
+    cursor: pointer;
 }
