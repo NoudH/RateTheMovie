@@ -59,7 +59,6 @@ class AddMovie extends Component {
     }
 
     postMovie = () => {
-        console.log("send post");
         Axios.post('http://localhost:8080/api/movie/', {
             title: this.state.title,
             releaseYear: this.state.releaseYear,

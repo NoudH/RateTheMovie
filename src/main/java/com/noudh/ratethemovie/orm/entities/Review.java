@@ -21,6 +21,7 @@ public class Review {
     @JsonIgnore
     private Movie movie;
 
+    @Column(length = 100000)
     private String comment;
 
     private Date date;

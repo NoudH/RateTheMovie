@@ -8,6 +8,7 @@ import MovieDetailed from "./pages/MovieDetailed";
 import 'bootstrap/dist/css/bootstrap.css';
 import AddMovie from "./pages/AddMovie";
 import * as jwtDecoder from "jwt-decode";
+import AddActor from "./pages/AddActor";
 
 function isAuth(Role){
     return window.localStorage.getItem("jwt") !== null &&
@@ -21,7 +22,8 @@ ReactDOM.render(
         <Route path="/index" component={App} />
         <Route path="/login" component={Login}/>
         <Route path="/movie" component={MovieDetailed} />
-        <Route path="/addMovie" component={isAuth() ? AddMovie : Login }/>
+        <Route path="/addMovie" component={isAuth("ROLE_USER") ? AddMovie : Login }/>
+        <Route path="/addActor" component={isAuth() ? AddActor : Login}/>
     </Router>,
     document.getElementById('root')
 );

@@ -27,6 +27,7 @@ public class Person {
 
     private EmploymentJob employmentJob;
 
+    @Column(length = 100000)
     private String description;
 
     public Person(String name, String imageUrl, Date dateOfBirth, List<Movie> movies, EmploymentJob employmentJob, String description) {
