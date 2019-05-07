@@ -78,7 +78,14 @@ class Form extends Component {
             })
                 .then(res => res.json())
                 .then(data => {console.log(data); window.localStorage.setItem("jwt", data.token)})
-                .then(() => window.location = "/index")
+                .then(() => {
+                    const params = new URLSearchParams(window.location.search);
+                    if(params.get("redirect") === null){
+                        window.location = "/index";
+                    } else {
+                        window.location = params.get("redirect");
+                    }
+                })
         }
     }
 }

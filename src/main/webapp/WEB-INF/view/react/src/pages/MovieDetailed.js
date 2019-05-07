@@ -6,11 +6,12 @@ import Input from "../components/Form";
 import Comment from "../components/Comment";
 import './css/MovieDetailed.css'
 import Actor from "../components/Actor";
+import * as jwtDecoder from 'jwt-decode';
 
 class MovieDetailed extends Component {
     constructor(props) {
         super(props);
-        this.state = { movie: { reviews:[], actors:[] } };
+        this.state = { movie: { reviews:[], actors:[] }, comment : "", rating: 0 };
     }
 
     componentDidMount() {
@@ -22,6 +23,27 @@ class MovieDetailed extends Component {
                 this.setState({movie: movieData});
             });
     }
+
+    postComment = () =>{
+        if(this.state.rating === 0){
+            return;
+        }
+        const params = new URLSearchParams(window.location.search);
+        Axios.post('http://localhost:8080/api/review/?movieid=' + params.get("id"), {
+            rating: this.state.rating,
+            comment: this.state.comment
+        }, {
+            headers: {
+                Authorization: "Bearer " + window.localStorage.getItem("jwt")
+            }
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    };
 
     render() {
         const reviews = this.state.movie.reviews.map(
@@ -46,6 +68,22 @@ class MovieDetailed extends Component {
                     <h4 className={"mt-3"}>Actors:</h4>
                     {actors}
                     <h4 className={"mt-3"}>Comments:</h4>
+                    {
+                        window.localStorage.getItem("jwt") !== null ?
+                            <div className={"commentForm"}>
+                                <h4>Write a comment:</h4>
+                                <input className={"bg-white"} type={"number"} placeholder={"Rating"} max={5} min={1} onChange={(event) => {
+                                    let val = parseInt(event.target.value);
+                                    if(val > 5){
+                                        val = 5;
+                                    }
+                                    this.setState({rating: val})
+                                }}/>
+                                <textarea className={"bg-white"} placeholder={"Comment"} onChange={(event) => this.setState({comment: event.target.value})}/>
+                                <button className={"btn btn-primary"} onClick={this.postComment}>Submit</button>
+                            </div>
+                        : ""
+                    }
                     {reviews}
                 </div>
             </div>

@@ -38,7 +38,7 @@ class AddMovie extends Component {
 
     addTag = (event) => {
         const oldTags = this.state.tags;
-        this.setState({tags: oldTags.concat(event.target.value)})
+        this.setState({tags: oldTags.concat(this.state.genres[parseInt(event.target.value)])})
     };
 
     removeTag = (index) => {
@@ -79,7 +79,7 @@ class AddMovie extends Component {
             .catch(function (error) {
                 console.log(error);
             });
-    }
+    };
 
     render() {
         return (
@@ -96,7 +96,7 @@ class AddMovie extends Component {
                     <h4>Genres:</h4>
                     {
                         this.state.tags.map(
-                            (genre, index) => (
+                            ({genre}, index) => (
                                 <span className={"tag"} key={index}>{genre} <span className={"close"} onClick={() => this.removeTag(index)}>x</span></span>
                             )
                         )
@@ -105,7 +105,7 @@ class AddMovie extends Component {
                         {
                             this.state.genres.map(
                                 ({genre}, index) => (
-                                    <option key={index} value={genre}>{genre.toLowerCase()}</option>
+                                    <option key={index} value={index}>{genre.toLowerCase()}</option>
                                 )
                             )
                         }

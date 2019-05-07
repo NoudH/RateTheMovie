@@ -14,7 +14,7 @@ class NavigationBar extends Component {
                     <Nav className="mr-auto">
                         <Nav.Link href="/">Home</Nav.Link>
                         {window.localStorage.getItem("jwt") !== null ? <Nav.Link href="/addMovie">Add Movie</Nav.Link> : ""}
-
+                        {jwtDecoder(window.localStorage.getItem("jwt")).roles.includes("ROLE_ADMIN") !== null ? <Nav.Link href="/addActor">Add Actor</Nav.Link> : ""}
                     </Nav>
                 </Navbar.Collapse>
                 <Navbar.Collapse className="justify-content-end">
