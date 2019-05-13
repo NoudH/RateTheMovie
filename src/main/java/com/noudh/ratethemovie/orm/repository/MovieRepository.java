@@ -9,16 +9,26 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 
 public interface MovieRepository extends PagingAndSortingRepository<Movie, Long> {
+
+    Page<Movie> findByTitleContaining(String title, Pageable pageable);
+
     Page<Movie> findByActors_Name(String actors_name, Pageable pageable);
 
-    @Query("SELECT m from Movie m join m.reviews r where avg(r.rating) >= ?1 ")
-    Page<Movie> findByRating(Integer rating, Pageable pageable);
+    @Query("SELECT m from Movie m join m.reviews r where avg(r.rating) >= ?1")
+    Page<Movie> findByRating(Double rating, Pageable pageable);
+
+    @Query("SELECT m from Movie m where m.title like CONCAT('%',?1,'%') and ?2 <= (select avg(r.rating) from Movie mo left join mo.reviews r where mo.id = m.id )")
+    Page<Movie> findByTitleAndRating(String title, Double rating, Pageable pageable);
 
     Page<Movie> findByDirectorName(String director, Pageable pageable);
 
     Page<Movie> findByGenres_Genre(Genre genre, Pageable pageable);
 
+    Page<Movie> findByTitleContainingAndGenres_Genre(String title, Genre genre, Pageable pageable);
+
     Page<Movie> findByReleaseYear(Integer releaseYear, Pageable pageable);
+
+    Page<Movie> findByTitleContainingAndReleaseYear(String title, Integer releaseYear, Pageable pageable);
 
     Page<Movie> findAll(Pageable pageable);
 }

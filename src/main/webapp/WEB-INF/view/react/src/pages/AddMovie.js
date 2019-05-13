@@ -100,7 +100,7 @@ class AddMovie extends Component {
                             )
                         )
                     }
-                    <select className="form-control mt-2" id="sel1" onChange={this.addTag}>
+                    <select className="form-control mt-2" id="genres" onChange={this.addTag}>
                         {
                             this.state.genres.map(
                                 ({genre}, index) => (

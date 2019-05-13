@@ -26,6 +26,7 @@ class App extends Component {
     return (
         <div className="App">
             <NavigationBar/>
+            <h2 className={"ml-4 mt-4"}>Newest/Upcoming Movies:</h2>
             <MovieList movies={this.state.movies}/>
         </div>
     );

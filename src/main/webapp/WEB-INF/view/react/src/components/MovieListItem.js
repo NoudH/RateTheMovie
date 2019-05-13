@@ -7,7 +7,7 @@ class MovieListItem extends Component {
     render() {
         return (
 
-            <div className={"movieContainer"}>
+            <div className={"movieContainer"} style={{width: this.props.width}}>
                 <Link to={"/movie?id=" + this.props.movie.id} style={{color: "#212529", textDecoration: "none"}}>
                     <div className={"row"}>
 

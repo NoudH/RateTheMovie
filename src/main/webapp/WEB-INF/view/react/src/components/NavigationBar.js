@@ -13,6 +13,7 @@ class NavigationBar extends Component {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link href="/">Home</Nav.Link>
+                        <Nav.Link href="/browse">Browse</Nav.Link>
                         {window.sessionStorage.getItem("jwt") !== null ? <Nav.Link href="/addMovie">Add Movie</Nav.Link> : ""}
                         {window.sessionStorage.getItem("jwt") !== null ? jwtDecoder(window.sessionStorage.getItem("jwt")).roles.includes("ROLE_ADMIN") ? <Nav.Link href="/addActor">Add Actor</Nav.Link> : "" : ""}
                     </Nav>

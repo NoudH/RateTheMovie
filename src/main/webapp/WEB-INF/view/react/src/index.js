@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import AddMovie from "./pages/AddMovie";
 import * as jwtDecoder from "jwt-decode";
 import AddActor from "./pages/AddActor";
+import BrowseMovies from "./pages/BrowseMovies";
 
 function isAuth(Role){
     return window.sessionStorage.getItem("jwt") !== null &&
@@ -21,6 +22,7 @@ ReactDOM.render(
         <Route path="/" exact component={App}/>
         <Route path="/index" component={App} />
         <Route path="/login" component={Login}/>
+        <Route path="/browse" component={BrowseMovies}/>
         <Route path="/movie" component={MovieDetailed} />
         <Route path="/addMovie" component={isAuth("ROLE_USER") ? AddMovie : Login }/>
         <Route path="/addActor" component={isAuth() ? AddActor : Login}/>
