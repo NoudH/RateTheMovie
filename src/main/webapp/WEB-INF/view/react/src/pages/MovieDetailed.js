@@ -34,7 +34,7 @@ class MovieDetailed extends Component {
             comment: this.state.comment
         }, {
             headers: {
-                Authorization: "Bearer " + window.localStorage.getItem("jwt")
+                Authorization: "Bearer " + window.sessionStorage.getItem("jwt")
             }
         })
             .then(function (response) {
@@ -69,7 +69,7 @@ class MovieDetailed extends Component {
                     {actors}
                     <h4 className={"mt-3"}>Comments:</h4>
                     {
-                        window.localStorage.getItem("jwt") !== null ?
+                        window.sessionStorage.getItem("jwt") !== null ?
                             <div className={"commentForm"}>
                                 <h4>Write a comment:</h4>
                                 <input className={"bg-white"} type={"number"} placeholder={"Rating"} max={5} min={1} onChange={(event) => {

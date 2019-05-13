@@ -9,17 +9,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
-import static java.util.stream.Collectors.toList;
 
 @RestController
 @RequestMapping("/api/user")
@@ -57,14 +52,10 @@ public class UserController {
     }
 
     @GetMapping(value = "/details", produces = "application/json")
-    public Map<Object, Object> userDetails(@AuthenticationPrincipal UserDetails userDetails){
+    public Map<Object, Object> userDetails(@RequestHeader (name="Authorization") String token){
         Map<Object, Object> model = new HashMap<>();
-        model.put("username", userDetails.getUsername());
-        model.put("roles", userDetails.getAuthorities()
-                .stream()
-                .map(a -> ((GrantedAuthority) a).getAuthority())
-                .collect(toList())
-        );
+        model.put("username", jwtTokenProvider.getUsername(token));
+        model.put("roles", jwtTokenProvider.getAuthentication(token).getAuthorities());
         return model;
     }
 }

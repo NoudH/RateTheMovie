@@ -13,13 +13,13 @@ class NavigationBar extends Component {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link href="/">Home</Nav.Link>
-                        {window.localStorage.getItem("jwt") !== null ? <Nav.Link href="/addMovie">Add Movie</Nav.Link> : ""}
-                        {window.localStorage.getItem("jwt") !== null ? jwtDecoder(window.localStorage.getItem("jwt")).roles.includes("ROLE_ADMIN") ? <Nav.Link href="/addActor">Add Actor</Nav.Link> : "" : ""}
+                        {window.sessionStorage.getItem("jwt") !== null ? <Nav.Link href="/addMovie">Add Movie</Nav.Link> : ""}
+                        {window.sessionStorage.getItem("jwt") !== null ? jwtDecoder(window.sessionStorage.getItem("jwt")).roles.includes("ROLE_ADMIN") ? <Nav.Link href="/addActor">Add Actor</Nav.Link> : "" : ""}
                     </Nav>
                 </Navbar.Collapse>
                 <Navbar.Collapse className="justify-content-end">
                     <Navbar.Text>
-                        {window.localStorage.getItem("jwt") !== null ? <Link to="/login">Signed in as: {jwtDecoder(window.localStorage.getItem("jwt")).sub}</Link> : <Link to="/login">Login</Link>}
+                        {window.sessionStorage.getItem("jwt") !== null ? <Link to="/login">Signed in as: {jwtDecoder(window.sessionStorage.getItem("jwt")).sub}</Link> : <Link to="/login">Login</Link>}
                     </Navbar.Text>
                 </Navbar.Collapse>
             </Navbar>

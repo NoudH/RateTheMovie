@@ -11,9 +11,9 @@ import * as jwtDecoder from "jwt-decode";
 import AddActor from "./pages/AddActor";
 
 function isAuth(Role){
-    return window.localStorage.getItem("jwt") !== null &&
-            (jwtDecoder(window.localStorage.getItem("jwt")).roles.includes(Role) ||
-            jwtDecoder(window.localStorage.getItem("jwt")).roles.includes("ROLE_ADMIN"))
+    return window.sessionStorage.getItem("jwt") !== null &&
+            (jwtDecoder(window.sessionStorage.getItem("jwt")).roles.includes(Role) ||
+            jwtDecoder(window.sessionStorage.getItem("jwt")).roles.includes("ROLE_ADMIN"))
 }
 
 ReactDOM.render(

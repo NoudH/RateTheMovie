@@ -69,7 +69,7 @@ class AddMovie extends Component {
             genres: this.state.genres
         }, {
             headers: {
-                Authorization: "Bearer " + window.localStorage.getItem("jwt")
+                Authorization: "Bearer " + window.sessionStorage.getItem("jwt")
             }
         })
             .then(function (response) {
