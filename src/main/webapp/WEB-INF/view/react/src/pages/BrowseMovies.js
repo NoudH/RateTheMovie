@@ -38,7 +38,25 @@ class BrowseMovies extends Component {
     }
 
     findWithMinRating(event){
-        Axios.get('http://localhost:8080/api/movie/findByGenre?page=0&size=20&title=' + this.state.title + '&genre=' + event.target.value)
+        Axios.get('http://localhost:8080/api/movie/findByMinRating?page=0&size=20&title=' + this.state.title + '&rating=' + event.target.value)
+            .then(res => {
+                console.log(res);
+                const movieData = res.data.content;
+                this.setState({movies: movieData});
+            });
+    }
+
+    findWithReleaseYear(event){
+        Axios.get('http://localhost:8080/api/movie/findByReleaseYear?page=0&size=20&title=' + this.state.title + '&year=' + event.target.value)
+            .then(res => {
+                console.log(res);
+                const movieData = res.data.content;
+                this.setState({movies: movieData});
+            });
+    }
+
+    findWithTitle(event){
+        Axios.get('http://localhost:8080/api/movie/findByTitle?page=0&size=20&title=' + event.target.value)
             .then(res => {
                 console.log(res);
                 const movieData = res.data.content;
@@ -52,7 +70,10 @@ class BrowseMovies extends Component {
                 <NavigationBar/>
                 <div className={"container"}>
                     <h2>Browse Movies:</h2>
-                    <input type={"text"} className={"bg-white"} id={"title"} name={"title"} placeholder={"Search"}/>
+                    <input type={"text"} className={"bg-white"} id={"title"} name={"title"} placeholder={"Search"} onChange={(event)=> {
+                        this.setState({title: event.target.value});
+                        this.findWithTitle(event)
+                    }}/>
                     <div className={this.state.showFilters ? "" : ""} id={this.state.showFilters ? "filter-form-down" : "filter-form-up"} >
                         <div className={"row"}>
                             <div className={"col-md-6"}>
@@ -62,7 +83,7 @@ class BrowseMovies extends Component {
                                     {
                                         this.state.genres.map(
                                             ({genre}, index) => (
-                                                <option key={index} value={index}>{genre.toLowerCase()}</option>
+                                                <option key={index} value={genre}>{genre.toLowerCase()}</option>
                                             )
                                         )
                                     }
@@ -70,7 +91,7 @@ class BrowseMovies extends Component {
                             </div>
                             <div className={"col-md-6"}>
                                 <h4>Release Year:</h4>
-                                <select className="form-control mt-2" id="genres" onChange={(event) => this.setState({releaseYear: event.target.value})}>
+                                <select className="form-control mt-2" id="genres" onChange={(event) => this.findWithReleaseYear(event)}>
                                     <option value={"none"}>none</option>
                                     {
                                         [...Array(new Date().getFullYear() - 1899)].map(
@@ -85,7 +106,7 @@ class BrowseMovies extends Component {
                         <div className={"row mt-2"}>
                             <div className={"col-md-6"}>
                                 <h4>Rating:</h4>
-                                <input type={"number"} className={"bg-white"} placeholder={"Rating"} min={0} max={5} step={0.1}/>
+                                <input type={"number"} className={"bg-white"} placeholder={"Rating"} min={0} max={5} step={0.1} onChange={(event) => this.findWithMinRating(event)}/>
                             </div>
                         </div>
                     </div>

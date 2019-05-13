@@ -63,4 +63,9 @@ public class MovieController {
     public Page<Movie> findByMinRating(@RequestParam int page, @RequestParam int size, @RequestParam Double rating, @RequestParam(required = false) String title){
         return movieRepository.findByTitleAndRating(title == null ? "" : title, rating, PageRequest.of(page, size));
     }
+
+    @GetMapping(value = "/findByTitle", produces = "application/json")
+    public Page<Movie> findByTitle(@RequestParam int page, @RequestParam int size, @RequestParam String title){
+        return movieRepository.findByTitleContaining(title, PageRequest.of(page, size));
+    }
 }
