@@ -13,5 +13,6 @@ public enum Genre {
     FANTASY,
     MEDIEVAL,
     HISTORICAL,
-    ROMANCE
+    ROMANCE,
+    THRILLER
 }

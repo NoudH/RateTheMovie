@@ -17,6 +17,7 @@ public class Movie {
 
     private String trailerUrl;
 
+    @Column(length = 100000)
     private String imageUrl;
 
     @Column(length = 100000)

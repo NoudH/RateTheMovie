@@ -16,6 +16,7 @@ public class Person {
 
     private String name;
 
+    @Column(length = 100000)
     private String imageUrl;
 
     private Date dateOfBirth;

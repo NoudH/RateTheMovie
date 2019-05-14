@@ -23,7 +23,7 @@ class MovieListItem extends Component {
                             />
                             <p className={"text-left mb-0 mt-1 text-secondary"}>{this.props.movie.releaseYear}</p>
                             {this.props.movie.genres.map((genre, i) => {
-                                return (<span className={"float-left"} key={i}>{genre.genre} </span>)
+                                return (<span className={"float-left mr-2"} key={i}><u>{genre.genre}</u> </span>)
                             })}
                             <br/>
                             <p className={"font-weight-bold mb-0"}>Description:</p>

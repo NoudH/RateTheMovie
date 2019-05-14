@@ -8,7 +8,7 @@ class AddMovie extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {actorData: [], actors: [], genres: [], tags: [], title: "", releaseYear: 0, description: "", trailerUrl: "", imageUrl: ""}
+        this.state = {actorData: [], actors: [], genres: [], tags: [], title: "", releaseYear: 0, description: "", trailerUrl: "", imageUrl: "", movieGenres: []}
     }
 
     componentDidMount() {
@@ -38,13 +38,20 @@ class AddMovie extends Component {
 
     addTag = (event) => {
         const oldTags = this.state.tags;
-        this.setState({tags: oldTags.concat(this.state.genres[parseInt(event.target.value)])})
+        const oldGenres = this.state.movieGenres;
+        this.setState({tags: oldTags.concat(this.state.genres[parseInt(event.target.value)])});
+        this.setState({movieGenres: oldGenres.concat(this.state.genres[parseInt(event.target.value)])});
     };
 
     removeTag = (index) => {
         const oldTags = this.state.tags;
         oldTags.splice(index, 1);
-        this.setState({tags: oldTags})
+
+        const oldGenres = this.state.movieGenres;
+        oldGenres.splice(index, 1);
+
+        this.setState({tags: oldTags});
+        this.setState({movieGenres: oldGenres});
     };
 
     addActor(index){
@@ -66,7 +73,7 @@ class AddMovie extends Component {
             imageUrl: this.state.imageUrl,
             description: this.state.description,
             actors: this.state.actors,
-            genres: this.state.genres
+            genres: this.state.movieGenres
         }, {
             headers: {
                 Authorization: "Bearer " + window.sessionStorage.getItem("jwt")
@@ -74,6 +81,9 @@ class AddMovie extends Component {
         })
             .then(function (response) {
                 console.log(response);
+                if(response.data === 200){
+                    window.location = "/addMovie";
+                }
             })
             .catch(function (error) {
                 console.log(error);

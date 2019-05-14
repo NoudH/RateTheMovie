@@ -27,6 +27,9 @@ class AddActor extends Component {
         })
             .then(function (response) {
                 console.log(response);
+                if(response.data === 200){
+                    window.location = "/addActor";
+                }
             })
             .catch(function (error) {
                 console.log(error);

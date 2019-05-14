@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import MovieListItem from "./MovieListItem";
 
-class MyComponent extends Component {
+class MovieList extends Component {
     render() {
         const movies = this.props.movies.map(movie => <MovieListItem key={movie.id} movie={movie} width={this.props.width}/>);
         return (
@@ -13,6 +13,6 @@ class MyComponent extends Component {
     }
 }
 
-MyComponent.propTypes = {};
+MovieList.propTypes = {};
 
-export default MyComponent;
+export default MovieList;

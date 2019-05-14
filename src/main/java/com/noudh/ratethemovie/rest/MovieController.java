@@ -34,6 +34,13 @@ public class MovieController {
         return movieRepository.save(movie) != null ? 200 : 500;
     }
 
+    @Secured("ROLE_ADMIN")
+    @DeleteMapping(value = "/", produces = "application/json")
+    public Integer deleteMovie(@RequestParam Long id){
+        movieRepository.deleteById(id);
+        return 200;
+    }
+
     @GetMapping(value = "/findByDirector", params = {"page", "size", "director"}, produces = "application/json")
     public Page<Movie> findMovieByDirector(@RequestParam int page, @RequestParam int size, @RequestParam String director) {
         return movieRepository.findByDirectorName(director, PageRequest.of(page, size));
@@ -67,5 +74,16 @@ public class MovieController {
     @GetMapping(value = "/findByTitle", produces = "application/json")
     public Page<Movie> findByTitle(@RequestParam int page, @RequestParam int size, @RequestParam String title){
         return movieRepository.findByTitleContaining(title, PageRequest.of(page, size));
+    }
+
+    @GetMapping(value = "/browse", produces = "application/json")
+    public Page<Movie> browseMovies(@RequestParam int page,
+                                    @RequestParam int size,
+                                    @RequestParam(required = false) String title,
+                                    @RequestParam(required = false, defaultValue = "0") Integer year,
+                                    @RequestParam(required = false, defaultValue = "0") Double rating,
+                                    @RequestParam(required = false) Genre genre
+    ){
+        return movieRepository.findByTitleContainingAndRatingAndReleaseYearAndGenres(title == null ? "" : title, rating, year, genre, PageRequest.of(page, size));
     }
 }

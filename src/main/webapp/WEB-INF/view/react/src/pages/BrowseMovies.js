@@ -9,7 +9,7 @@ class BrowseMovies extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {title: "", releaseYear: 0, movies: [], genres: [], showFilters: false}
+        this.state = {title: "", releaseYear: 0, movies: [], genres: [], rating: 0, genre: "", showFilters: false}
     }
 
     componentDidMount() {
@@ -28,39 +28,12 @@ class BrowseMovies extends Component {
             });
     }
 
-    findWithGenres(event){
-        Axios.get('http://localhost:8080/api/movie/findByGenre?page=0&size=20&title=' + this.state.title + '&genre=' + event.target.value)
+    browseMovies(){
+        Axios.get('http://localhost:8080/api/movie/browse?page=0&size=20&title='+ this.state.title + "&rating=" + this.state.rating + "&year=" + this.state.releaseYear + "&genre=" + this.state.genre)
             .then(res => {
                 console.log(res);
-                const movieData = res.data.content;
-                this.setState({movies: movieData});
-            });
-    }
-
-    findWithMinRating(event){
-        Axios.get('http://localhost:8080/api/movie/findByMinRating?page=0&size=20&title=' + this.state.title + '&rating=' + event.target.value)
-            .then(res => {
-                console.log(res);
-                const movieData = res.data.content;
-                this.setState({movies: movieData});
-            });
-    }
-
-    findWithReleaseYear(event){
-        Axios.get('http://localhost:8080/api/movie/findByReleaseYear?page=0&size=20&title=' + this.state.title + '&year=' + event.target.value)
-            .then(res => {
-                console.log(res);
-                const movieData = res.data.content;
-                this.setState({movies: movieData});
-            });
-    }
-
-    findWithTitle(event){
-        Axios.get('http://localhost:8080/api/movie/findByTitle?page=0&size=20&title=' + event.target.value)
-            .then(res => {
-                console.log(res);
-                const movieData = res.data.content;
-                this.setState({movies: movieData});
+                const data = res.data.content;
+                this.setState({movies: data});
             });
     }
 
@@ -71,15 +44,16 @@ class BrowseMovies extends Component {
                 <div className={"container"}>
                     <h2>Browse Movies:</h2>
                     <input type={"text"} className={"bg-white"} id={"title"} name={"title"} placeholder={"Search"} onChange={(event)=> {
-                        this.setState({title: event.target.value});
-                        this.findWithTitle(event)
+                        this.setState({title: event.target.value}, () => this.browseMovies());
                     }}/>
                     <div className={this.state.showFilters ? "" : ""} id={this.state.showFilters ? "filter-form-down" : "filter-form-up"} >
                         <div className={"row"}>
                             <div className={"col-md-6"}>
                                 <h4>Genre:</h4>
-                                <select className="form-control mt-2" id="genres" onChange={(event) => this.findWithGenres(event)}>
-                                    <option value={"none"}>none</option>
+                                <select className="form-control mt-2" id="genres" onChange={(event) => {
+                                    this.setState({genre: event.target.value}, () => this.browseMovies());
+                                }}>
+                                    <option value={""}>none</option>
                                     {
                                         this.state.genres.map(
                                             ({genre}, index) => (
@@ -91,8 +65,10 @@ class BrowseMovies extends Component {
                             </div>
                             <div className={"col-md-6"}>
                                 <h4>Release Year:</h4>
-                                <select className="form-control mt-2" id="genres" onChange={(event) => this.findWithReleaseYear(event)}>
-                                    <option value={"none"}>none</option>
+                                <select className="form-control mt-2" id="year" onChange={(event) => {
+                                    this.setState({releaseYear: event.target.value}, () => this.browseMovies());
+                                }}>
+                                    <option value={""}>none</option>
                                     {
                                         [...Array(new Date().getFullYear() - 1899)].map(
                                             (x, index) => (
@@ -106,7 +82,9 @@ class BrowseMovies extends Component {
                         <div className={"row mt-2"}>
                             <div className={"col-md-6"}>
                                 <h4>Rating:</h4>
-                                <input type={"number"} className={"bg-white"} placeholder={"Rating"} min={0} max={5} step={0.1} onChange={(event) => this.findWithMinRating(event)}/>
+                                <input type={"number"} className={"bg-white"} placeholder={"Rating"} min={0} max={5} step={0.1} onChange={(event) => {
+                                    this.setState({rating: event.target.value}, () => this.browseMovies());
+                                }}/>
                             </div>
                         </div>
                     </div>
