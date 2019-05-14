@@ -9,7 +9,7 @@ class BrowseMovies extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {title: "", releaseYear: 0, movies: [], genres: [], rating: 0, genre: "", showFilters: false}
+        this.state = {title: "", releaseYear: 0, movies: [], genres: [], rating: 0, genre: "", showFilters: false, initialLoad: true}
     }
 
     componentDidMount() {
@@ -46,7 +46,7 @@ class BrowseMovies extends Component {
                     <input type={"text"} className={"bg-white"} id={"title"} name={"title"} placeholder={"Search"} onChange={(event)=> {
                         this.setState({title: event.target.value}, () => this.browseMovies());
                     }}/>
-                    <div className={this.state.showFilters ? "" : ""} id={this.state.showFilters ? "filter-form-down" : "filter-form-up"} >
+                    <div className={this.state.initialLoad ? "d-none" : ""} id={this.state.showFilters ? "filter-form-down" : "filter-form-up"} >
                         <div className={"row"}>
                             <div className={"col-md-6"}>
                                 <h4>Genre:</h4>
@@ -88,7 +88,7 @@ class BrowseMovies extends Component {
                             </div>
                         </div>
                     </div>
-                    <button className={"btn btn-link"} onClick={() => this.setState({showFilters: !this.state.showFilters})}><i className={this.state.showFilters ? "arrow-up" :"arrow-down"}/> {this.state.showFilters ? "Close options" : "Show more options"}</button>
+                    <button className={"btn btn-link"} onClick={() => this.setState({showFilters: !this.state.showFilters, initialLoad: false})}><i className={this.state.showFilters ? "arrow-up" :"arrow-down"}/> {this.state.showFilters ? "Close filters" : "Show more filters"}</button>
                     <hr/>
                     <MovieList movies={this.state.movies} width={"100%"}/>
                 </div>

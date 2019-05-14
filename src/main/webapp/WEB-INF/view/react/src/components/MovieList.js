@@ -6,7 +6,7 @@ class MovieList extends Component {
     render() {
         const movies = this.props.movies.map(movie => <MovieListItem key={movie.id} movie={movie} width={this.props.width}/>);
         return (
-            <div className={"ml-4 mt-2"} id={"movieList"}>
+            <div className={"mt-2"} id={"movieList"}>
                 {movies}
             </div>
         );
