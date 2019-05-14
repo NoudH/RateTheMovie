@@ -63,7 +63,7 @@ class MovieDetailed extends Component {
                     <h1>{this.state.movie.title}</h1>
                     <h3 className={"text-secondary"}>{this.state.movie.releaseYear}</h3>
                     {
-                        this.state.movie.trailerUrl !== undefined ?
+                        this.state.movie.trailerUrl !== undefined && this.state.movie.trailerUrl !== null ?
                             this.state.movie.trailerUrl.includes("youtube") ?
                                 <div className='embed-container'>
                                     <iframe id="ytplayer" type="text/html" width={"100%"} style={{maxHeight: "1000px"}}
