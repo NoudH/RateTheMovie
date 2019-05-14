@@ -17,7 +17,7 @@ public class GenreEntity {
     @Enumerated(EnumType.STRING)
     private Genre genre;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "genres")
     @JsonIgnore
     private List<Movie> movies;
 

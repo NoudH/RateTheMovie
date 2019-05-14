@@ -1,7 +1,9 @@
 package com.noudh.ratethemovie.rest;
 
 import com.noudh.ratethemovie.models.Genre;
+import com.noudh.ratethemovie.orm.entities.GenreEntity;
 import com.noudh.ratethemovie.orm.entities.Movie;
+import com.noudh.ratethemovie.orm.repository.GenreRepository;
 import com.noudh.ratethemovie.orm.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,16 +13,19 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/movie")
 public class MovieController {
 
     private MovieRepository movieRepository;
+    private GenreRepository genreRepository;
 
     @Autowired
-    public MovieController(MovieRepository movieRepository) {
+    public MovieController(MovieRepository movieRepository, GenreRepository genreRepository) {
         this.movieRepository = movieRepository;
+        this.genreRepository = genreRepository;
     }
 
     @GetMapping(value = "/", params = "id", produces = "application/json")
@@ -31,6 +36,7 @@ public class MovieController {
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @PostMapping(value = "/", consumes = "application/json", produces = "application/json")
     public Integer postMovie(@RequestBody Movie movie) {
+        movie.setGenres(genreRepository.findByGenreIn(movie.getGenres().stream().map(GenreEntity::getGenre).collect(Collectors.toList())));
         return movieRepository.save(movie) != null ? 200 : 500;
     }
 

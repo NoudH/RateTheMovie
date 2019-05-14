@@ -1,12 +1,9 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import Axios from "axios";
 import NavigationBar from "../components/NavigationBar";
-import Input from "../components/Form";
 import Comment from "../components/Comment";
 import './css/MovieDetailed.css'
 import Actor from "../components/Actor";
-import * as jwtDecoder from 'jwt-decode';
 
 class MovieDetailed extends Component {
     constructor(props) {
@@ -39,6 +36,9 @@ class MovieDetailed extends Component {
         })
             .then(function (response) {
                 console.log(response);
+                if(response.status === 200){
+                    window.location = window.location;
+                }
             })
             .catch(function (error) {
                 console.log(error);

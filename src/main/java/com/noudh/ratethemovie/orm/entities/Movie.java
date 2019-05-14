@@ -39,7 +39,7 @@ public class Movie {
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     private List<Person> actors;
 
-    @ManyToMany(mappedBy = "movies")
+    @ManyToMany
     private List<GenreEntity> genres;
 
     public Movie(String title, String trailerUrl, String imageUrl, String description, Integer releaseYear, List<Review> reviews, User user, Person director, List<Person> actors, List<GenreEntity> genres) {
