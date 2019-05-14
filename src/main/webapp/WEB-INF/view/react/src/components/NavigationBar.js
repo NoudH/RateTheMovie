@@ -22,6 +22,10 @@ class NavigationBar extends Component {
                     <Navbar.Text>
                         {window.sessionStorage.getItem("jwt") !== null ? <Link to="/login">Signed in as: {jwtDecoder(window.sessionStorage.getItem("jwt")).sub}</Link> : <Link to="/login">Login</Link>}
                     </Navbar.Text>
+                    <div className={"divider"}/>
+                    <Navbar.Text>
+                        {window.sessionStorage.getItem("jwt") !== null ? <a href={window.location} onClick={()=>{window.sessionStorage.removeItem("jwt")}}>Logout</a> : <Link to={"/signup"}>Signup</Link>}
+                    </Navbar.Text>
                 </Navbar.Collapse>
             </Navbar>
         );

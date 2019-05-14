@@ -1,6 +1,7 @@
 package com.noudh.ratethemovie.rest;
 
 import com.noudh.ratethemovie.configuration.JwtTokenProvider;
+import com.noudh.ratethemovie.models.UserRole;
 import com.noudh.ratethemovie.orm.entities.User;
 import com.noudh.ratethemovie.orm.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -23,12 +25,14 @@ public class UserController {
     private final UserRepository userRepository;
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserController(UserRepository userRepository, JwtTokenProvider jwtTokenProvider, AuthenticationManager authenticationManager) {
+    public UserController(UserRepository userRepository, JwtTokenProvider jwtTokenProvider, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.jwtTokenProvider = jwtTokenProvider;
         this.authenticationManager = authenticationManager;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostMapping(value = "/login", produces = "application/json")
@@ -47,8 +51,18 @@ public class UserController {
     }
 
     @PostMapping(value = "/register", consumes = "application/json", produces = "application/json")
-    public int register(User user){
-        return userRepository.save(user) != null ? 200 : 500;
+    public ResponseEntity register(@RequestBody User user){
+
+        user.setUserRole(UserRole.ROLE_USER);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+
+        String token = jwtTokenProvider.createToken(user.getUsername(), Collections.singletonList(this.userRepository.findByUsername(user.getUsername()).getUserRole().toString()));
+
+        Map<Object, Object> model = new HashMap<>();
+        model.put("username", user.getUsername());
+        model.put("token", token);
+        return ResponseEntity.ok(model);
     }
 
     @GetMapping(value = "/details", produces = "application/json")
