@@ -32,7 +32,7 @@ class BrowseActors extends Component {
     }
 
     setPage = (pagenr) => {
-        this.setState({page: pagenr}, () => this.findActors()   )
+        this.setState({page: pagenr}, () => this.findActors())
     };
 
     render() {
@@ -43,7 +43,7 @@ class BrowseActors extends Component {
                     <h2>Search for Actors:</h2>
                     <input type={"text"} className={"bg-white"} id={"title"} name={"title"} placeholder={"Search"}
                            onChange={(event) => {
-                               this.setState({name: event.target.value}, () => this.findActors());
+                               this.setState({name: event.target.value, page: 1}, () => this.findActors());
                            }}/>
                     <PageControls page={this.state.page} lastPage={this.state.lastPage} onChange={(pagenr) => this.setPage(pagenr)}/>
                     {
