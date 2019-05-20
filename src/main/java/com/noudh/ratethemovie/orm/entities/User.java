@@ -28,7 +28,8 @@ public class User implements UserDetails {
     @JsonIgnore
     private List<Review> reviews;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Movie> movies;
 
     @Enumerated(EnumType.STRING)

@@ -1,0 +1,7 @@
+.actor_container:nth-child(odd) {
+    background-color: #dddddd;
+}
+
+.actor_container {
+    padding: 10px;
+}

@@ -54,7 +54,7 @@ class MovieDetailed extends Component {
         const actors = this.state.movie.actors.map(
             ({id, dateOfBirth, description, employmentJob, imageUrl, name}, index) => (
                 <Actor key={index} dateOfBirth={dateOfBirth} description={description} employmentJob={employmentJob}
-                       imageUrl={imageUrl} name={name}/>
+                       imageUrl={imageUrl} name={name} id={id}/>
             ));
         return (
             <div>
@@ -79,7 +79,8 @@ class MovieDetailed extends Component {
                                 Your browser does not support the video tag.
                             </video>
                     }
-
+                    <h4 className={"mt-3"}>Description:</h4>
+                    {this.state.movie.description}
                     <h4 className={"mt-3"}>Actors:</h4>
                     {actors}
                     <h4 className={"mt-3"}>Comments:</h4>

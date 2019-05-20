@@ -20,7 +20,7 @@ public interface MovieRepository extends PagingAndSortingRepository<Movie, Long>
     @Query("SELECT m from Movie m where m.title like CONCAT('%',?1,'%') and ?2 <= (select avg(r.rating) from Movie mo left join mo.reviews r where mo.id = m.id )")
     Page<Movie> findByTitleAndRating(String title, Double rating, Pageable pageable);
 
-    @Query("SELECT m " +
+    @Query( "SELECT m " +
             "from Movie m " +
             "where m.title like CONCAT('%',?1,'%') and " +
             "(?2 <= (select avg(r.rating) from Movie mo left join mo.reviews r where mo.id = m.id ) or 0 = (select count(r) from Movie mo left join mo.reviews r where mo.id = m.id group by mo)) and" +

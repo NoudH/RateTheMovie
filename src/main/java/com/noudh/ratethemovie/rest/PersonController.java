@@ -8,6 +8,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/person")
 public class PersonController {
@@ -29,16 +31,18 @@ public class PersonController {
         return personRepository.save(person) != null ? 200 : 500;
     }
 
+    @GetMapping(value = "/findById", produces = "application/json")
+    public Optional<Person> findById(@RequestParam Long id){
+        return personRepository.findById(id);
+    }
+
     @GetMapping(value = "/findByName", params = {"name", "page", "size"}, produces = "application/json")
     public Page<Person> findPersonByName(@RequestParam String name, @RequestParam int page, @RequestParam int size){
-        return personRepository.findByName(name, PageRequest.of(page, size));
+        return personRepository.findByNameContaining(name, PageRequest.of(page, size));
     }
 
     @GetMapping(value = "/searchByName", params = {"name", "page", "size"}, produces = "application/json")
     public Page<Person> searchPersonByName(@RequestParam String name, @RequestParam int page, @RequestParam int size){
         return personRepository.findByNameContaining(name, PageRequest.of(page, size));
     }
-
-
-
 }

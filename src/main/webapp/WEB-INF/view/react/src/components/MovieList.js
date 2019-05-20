@@ -4,9 +4,9 @@ import MovieListItem from "./MovieListItem";
 
 class MovieList extends Component {
     render() {
-        const movies = this.props.movies.map(movie => <MovieListItem key={movie.id} movie={movie} width={this.props.width}/>);
+        const movies = this.props.movies.map(movie => <MovieListItem key={movie.id} movie={movie}/>);
         return (
-            <div className={"mt-2"} id={"movieList"}>
+            <div className={"mt-2"} id={"movieList"} style={{width: this.props.width}}>
                 {movies}
             </div>
         );

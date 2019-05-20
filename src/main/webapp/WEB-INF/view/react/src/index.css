@@ -1,9 +1,18 @@
 .movieContainer{
     height: auto;
     padding: 10px;
-    width: 50%;
 }
 
 .movieContainer:nth-child(odd){
+    background-color: #dddddd;
+}
+
+.page_controls {
+    text-align: center;
+    margin: auto;
+    width: auto;
+}
+
+.btn-default:hover {
     background-color: #dddddd;
 }
