@@ -14,5 +14,6 @@ RUN npm run-script build
 
 RUN apt-get update && apt-get install -y apache2
 COPY ./src/main/webapp/WEB-INF/view/react/httpd.conf /usr/local/apache2/conf/httpd.conf
-COPY ./src/main/webapp/WEB-INF/view/react/build/ /usr/local/apache2/htdocs/
+RUN ls
+COPY ./build/ /usr/local/apache2/htdocs/
 EXPOSE 80
