@@ -1,0 +1,24 @@
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
+  MAVEN_CLI_OPTS: ""
+
+stages:
+  - deploy
+
+cache:
+  paths:
+    - .m2/repository/
+    - target/
+    
+deploy RateTheMovie:
+  stage: deploy
+  image: docker:stable
+  before_script:
+    - docker info
+  script:
+    - docker build -f dockerfile -t ratethemovie:0.0.1 .
+    - docker run -d -p 0.0.0.0:80:80 --name rate_the_movie ratethemovie:0.0.1
+  only:
+    - /^master*$/
+  tags:
+    - deploy
