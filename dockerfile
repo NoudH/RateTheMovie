@@ -14,6 +14,6 @@ RUN npm run-script build
 
 RUN apt-get update && apt-get install -y apache2
 COPY ./src/main/webapp/WEB-INF/view/react/httpd.conf /usr/local/apache2/conf/httpd.conf
-RUN ls
+RUN find / -name apache2
 RUN mv -v ./build/* ~/usr/local/apache2/htdocs/
 EXPOSE 80
