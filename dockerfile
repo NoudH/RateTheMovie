@@ -11,7 +11,7 @@ ENV PATH /usr/src/app/node_modules/.bin:$PATH
 RUN npm install
 CMD npm run-script build
 
-RUN apt-get install apache2
+RUN apt-get install -y apache2
 COPY ./src/main/webapp/WEB-INF/view/react/httpd.conf /usr/local/apache2/conf/httpd.conf
 COPY ./src/main/webapp/WEB-INF/view/react/build/ /usr/local/apache2/htdocs/
 EXPOSE 80
