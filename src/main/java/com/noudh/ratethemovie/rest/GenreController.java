@@ -21,7 +21,7 @@ public class GenreController {
 
     @Secured({"ROLE_ADMIN"})
     @PostMapping(value = "/", consumes = "application/json", produces = "application/json")
-    public Integer postReview(@RequestBody GenreEntity genre){
+    public Integer postGenre(@RequestBody GenreEntity genre){
         return genreRepository.save(genre) != null ? 200 : 500;
     }
 

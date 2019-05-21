@@ -52,19 +52,14 @@ public class MovieController {
         return movieRepository.findByDirectorName(director, PageRequest.of(page, size));
     }
 
-    @GetMapping(value = "/findByActor", params = {"page", "size", "actor"}, produces = "application/json")
-    public Page<Movie> findMovieByActor(@RequestParam int page, @RequestParam int size, @RequestParam String actor) {
-        return movieRepository.findByActors_Name(actor, PageRequest.of(page, size));
-    }
-
     @GetMapping(value = "/findByGenre", produces = "application/json")
-    public Page<Movie> findMovieByGenre(@RequestParam int page, @RequestParam int size, @RequestParam Genre genre, @RequestParam(required = false) String title) {
-        return movieRepository.findByTitleContainingAndGenres_Genre(title == null ? "" : title, genre, PageRequest.of(page, size));
+    public Page<Movie> findMovieByGenre(@RequestParam int page, @RequestParam int size, @RequestParam Genre genre) {
+        return movieRepository.findByGenres_Genre(genre, PageRequest.of(page, size));
     }
 
     @GetMapping(value = "/findByReleaseYear", produces = "application/json")
-    public Page<Movie> findMovieByReleaseYear(@RequestParam int page, @RequestParam int size, @RequestParam Integer year, @RequestParam(required = false) String title) {
-        return movieRepository.findByTitleContainingAndReleaseYear(title == null ? "" : title, year, PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "releaseYear")));
+    public Page<Movie> findMovieByReleaseYear(@RequestParam int page, @RequestParam int size, @RequestParam Integer year) {
+        return movieRepository.findByReleaseYear(year, PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "releaseYear")));
     }
 
     @GetMapping(value = "/all", produces = "application/json")
@@ -73,8 +68,8 @@ public class MovieController {
     }
 
     @GetMapping(value = "/findByMinRating", produces = "application/json")
-    public Page<Movie> findByMinRating(@RequestParam int page, @RequestParam int size, @RequestParam Double rating, @RequestParam(required = false) String title){
-        return movieRepository.findByTitleAndRating(title == null ? "" : title, rating, PageRequest.of(page, size));
+    public Page<Movie> findByMinRating(@RequestParam int page, @RequestParam int size, @RequestParam Double rating){
+        return movieRepository.findByRating(rating, PageRequest.of(page, size));
     }
 
     @GetMapping(value = "/findByTitle", produces = "application/json")

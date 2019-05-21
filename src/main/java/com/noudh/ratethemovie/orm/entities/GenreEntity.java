@@ -27,6 +27,10 @@ public class GenreEntity {
         this.movies = movies;
     }
 
+    public GenreEntity(Genre genre){
+        this.genre = genre;
+    }
+
     public GenreEntity() { }
 
     public List<Movie> getMovies() {
