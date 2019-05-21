@@ -17,7 +17,7 @@ deploy RateTheMovie:
     - docker info
   script:
     - docker build -f dockerfile -t ratethemovie:0.0.1 .
-    - docker run -d -p 0.0.0.0:80:80 --name foodatorybackendratethemovie:0.0.1
+    - docker run -d -p 0.0.0.0:80:80 --name rate_the_movie ratethemovie:0.0.1
   only:
     - /^master*$/
   tags:
