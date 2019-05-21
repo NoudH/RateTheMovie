@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import NavigationBar from "../components/NavigationBar";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -65,7 +64,5 @@ class AddActor extends Component {
         );
     }
 }
-
-AddActor.propTypes = {};
 
 export default AddActor;

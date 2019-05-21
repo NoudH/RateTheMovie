@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import StarRatings from 'react-star-ratings'
 import {Link} from 'react-router-dom';
 
@@ -32,12 +31,8 @@ class MovieListItem extends Component {
                     </div>
                 </Link>
             </div>
-
-        )
-            ;
+        );
     }
 }
-
-MovieListItem.propTypes = {};
 
 export default MovieListItem;

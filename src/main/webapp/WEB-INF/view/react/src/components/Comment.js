@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import StarRatings from "react-star-ratings";
 
 class Comment extends Component {
@@ -19,7 +18,5 @@ class Comment extends Component {
         );
     }
 }
-
-Comment.propTypes = {};
 
 export default Comment;

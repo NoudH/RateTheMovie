@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Navbar, Nav, NavDropdown} from 'react-bootstrap'
-import PropTypes from 'prop-types';
 import * as jwtDecoder from 'jwt-decode';
 import {Link} from 'react-router-dom';
 
@@ -32,7 +31,5 @@ class NavigationBar extends Component {
         );
     }
 }
-
-NavigationBar.propTypes = {};
 
 export default NavigationBar;

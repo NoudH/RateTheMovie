@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import StarRatings from "./MovieListItem";
 import {Link} from "react-router-dom";
 
 class ActorBig extends Component {

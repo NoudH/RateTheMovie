@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 
 class PageControls extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div className={"page_controls"}>

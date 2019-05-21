@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import NavigationBar from "../components/NavigationBar";
 import Axios from "axios";
-import MovieListItem from "../components/MovieListItem";
 import MovieList from "../components/MovieList";
 
 class ActorDetailed extends Component {
@@ -21,9 +20,6 @@ class ActorDetailed extends Component {
             });
     }
     render() {
-        const movies = this.state.actor.movies.map((movie, index) => (
-            <MovieListItem key={index} movie={movie} width={"100%"}/>
-        ));
         return (
             <div>
                 <NavigationBar/>

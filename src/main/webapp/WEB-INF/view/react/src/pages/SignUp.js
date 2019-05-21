@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import "./css/SignUp.css"
 import Axios from "axios";
 
@@ -54,7 +53,5 @@ class SignUp extends Component {
         );
     }
 }
-
-SignUp.propTypes = {};
 
 export default SignUp;

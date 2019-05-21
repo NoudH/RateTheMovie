@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import MovieListItem from "./MovieListItem";
 
 class MovieList extends Component {
@@ -12,7 +11,5 @@ class MovieList extends Component {
         );
     }
 }
-
-MovieList.propTypes = {};
 
 export default MovieList;

@@ -1,22 +1,22 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import "./css/AddMovie.css"
 import NavigationBar from "../components/NavigationBar";
 import Axios from "axios";
+import PageControls from "../components/PageControls";
 
 class AddMovie extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {actorData: [], actors: [], genres: [], tags: [], title: "", releaseYear: 0, description: "", trailerUrl: "", imageUrl: "", movieGenres: []}
+        this.state = {actorData: [], actors: [], genres: [], tags: [], title: "", releaseYear: 0, description: "", trailerUrl: "", imageUrl: "", movieGenres: [], page: 1, lastPage: 1, name: ""}
     }
 
     componentDidMount() {
-        Axios.get('http://localhost:8080/api/person/?page=0&size=20')
+        Axios.get('http://localhost:8080/api/person/?page=0&size=10')
             .then(res => {
                 console.log(res);
-                const data = res.data.content;
-                this.setState({actorData: data});
+                const data = res.data;
+                this.setState({actorData: data.content, lastPage: data.totalPages});
             });
 
         Axios.get('http://localhost:8080/api/genre')
@@ -27,13 +27,17 @@ class AddMovie extends Component {
             });
     }
 
-    findActorByName = (event) => {
-        Axios.get('http://localhost:8080/api/person/searchByName?name=' + event.target.value + '&page=0&size=20')
+    findActorByName = () => {
+        Axios.get('http://localhost:8080/api/person/searchByName?name=' + this.state.name + '&page=' + (this.state.page - 1) + '&size=10')
             .then(res => {
                 console.log(res);
-                const data = res.data.content;
-                this.setState({actorData: data});
+                const data = res.data;
+                this.setState({actorData: data.content, lastPage: data.totalPages});
             });
+    };
+
+    setPage = (pagenr) => {
+        this.setState({page: pagenr}, () => this.findActorByName())
     };
 
     addTag = (event) => {
@@ -130,7 +134,8 @@ class AddMovie extends Component {
                     <textarea placeholder={"Description"} onChange={(event) => {this.setState({description: event.target.value})}}/>
 
                     <h4 className={"mt-3"}>Actors:</h4>
-                    <input type={"text"} placeholder={"Search"} onChange={this.findActorByName}/>
+                    <input type={"text"} placeholder={"Search"} onChange={(event) => this.setState({page: 1, name: event.target.value}, () => this.findActorByName())}/>
+                    <PageControls page={this.state.page} lastPage={this.state.lastPage} onChange={(pagenr) => this.setPage(pagenr)}/>
                     {
                         this.state.actorData.map(
                             ({id, dateOfBirth, description, employmentJob, imageUrl, name}, index) => (
@@ -150,6 +155,7 @@ class AddMovie extends Component {
                             )
                         )
                     }
+                    <PageControls page={this.state.page} lastPage={this.state.lastPage} onChange={(pagenr) => this.setPage(pagenr)}/>
                     <br/>
                     <h5 className={"mt-3"}>Selected:</h5>
                     {
@@ -176,7 +182,5 @@ class AddMovie extends Component {
         );
     }
 }
-
-AddMovie.propTypes = {};
 
 export default AddMovie;

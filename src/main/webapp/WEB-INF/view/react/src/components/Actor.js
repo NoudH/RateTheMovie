@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import StarRatings from "./Comment";
 import {Link} from "react-router-dom";
 
 class Actor extends Component {
@@ -21,7 +19,5 @@ class Actor extends Component {
         );
     }
 }
-
-Actor.propTypes = {};
 
 export default Actor;

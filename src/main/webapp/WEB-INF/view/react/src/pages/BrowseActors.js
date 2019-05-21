@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import NavigationBar from "../components/NavigationBar";
 import Axios from "axios";
 import ActorBig from "../components/ActorBig";
@@ -57,7 +56,5 @@ class BrowseActors extends Component {
         );
     }
 }
-
-BrowseActors.propTypes = {};
 
 export default BrowseActors;

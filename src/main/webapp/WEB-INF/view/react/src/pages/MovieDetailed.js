@@ -66,7 +66,7 @@ class MovieDetailed extends Component {
                         this.state.movie.trailerUrl !== undefined && this.state.movie.trailerUrl !== null ?
                             this.state.movie.trailerUrl.includes("youtube") ?
                                 <div className='embed-container'>
-                                    <iframe id="ytplayer" type="text/html" width={"100%"} style={{maxHeight: "1000px"}}
+                                    <iframe id="ytplayer" width={"100%"} style={{maxHeight: "1000px"}}
                                             src={"https://www.youtube.com/embed/" + this.state.movie.trailerUrl.substr(this.state.movie.trailerUrl.length - 11) + "?autoplay=1"}
                                             frameBorder="0" allowFullScreen={true}/>
                                 </div>
@@ -108,7 +108,5 @@ class MovieDetailed extends Component {
         );
     }
 }
-
-MovieDetailed.propTypes = {};
 
 export default MovieDetailed;

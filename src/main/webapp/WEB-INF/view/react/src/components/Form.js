@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Input from './Input'
-import Axios from "axios"
 
 class Form extends Component {
 
@@ -67,7 +66,6 @@ class Form extends Component {
             object[key] = value;
         });
         var json = JSON.stringify(object);
-        console.log(json);
         if(!this.state.errcount) {
             fetch(this.props.action, {
                 method: this.props.method,
@@ -77,13 +75,18 @@ class Form extends Component {
                 }
             })
                 .then(res => res.json())
-                .then(data => {console.log(data); window.sessionStorage.setItem("jwt", data.token)})
-                .then(() => {
-                    const params = new URLSearchParams(window.location.search);
-                    if(params.get("redirect") === null){
-                        window.location = "/index";
+                .then( data => {
+                    console.log(data);
+                    if(data.status === 200) {
+                        window.sessionStorage.setItem("jwt", data.token);
+                        const params = new URLSearchParams(window.location.search);
+                        if(params.get("redirect") === null){
+                            window.location = "/index";
+                        } else {
+                            window.location = params.get("redirect");
+                        }
                     } else {
-                        window.location = params.get("redirect");
+                        window.location = "/login?error=true"
                     }
                 })
         }
