@@ -8,8 +8,8 @@ class PageControls extends Component {
                 <button className={(this.props.page === 1 ? "d-none" : "") + " btn btn-default"} onClick={() => {this.props.onChange(1)}}>&#x3C;&#x3C; First</button>
                 <button className={(this.props.page === 1 ? "d-none" : "") + " btn btn-default"} onClick={() => {this.props.onChange(this.props.page - 1)}}>&#x3C; Prev</button>
                 <button className={"btn btn-link"}>{this.props.page}</button>
-                <button className={(this.props.page === this.props.lastPage ? "d-none" : "") + " btn btn-default"} onClick={() => {this.props.onChange(this.props.page + 1)}}>Next &#x3E;</button>
-                <button className={(this.props.page === this.props.lastPage ? "d-none" : "") + " btn btn-default"} onClick={() => {this.props.onChange(this.props.lastPage)}}>Last &#x3E;&#x3E;</button>
+                <button className={(this.props.page === this.props.lastPage || this.props.lastPage === 0 ? "d-none" : "") + " btn btn-default"} onClick={() => {this.props.onChange(this.props.page + 1)}}>Next &#x3E;</button>
+                <button className={(this.props.page === this.props.lastPage || this.props.lastPage === 0 ? "d-none" : "") + " btn btn-default"} onClick={() => {this.props.onChange(this.props.lastPage)}}>Last &#x3E;&#x3E;</button>
             </div>
         );
     }
