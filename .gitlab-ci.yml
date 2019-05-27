@@ -24,7 +24,7 @@ build frontend:
     - mv .dockerignore ./build/
   artifacts:
     paths:
-    - /
+    - src/main/webapp/WEB-INF/view/react/build/
     expire_in: 5 mins
   only:
     - /^master*$/
