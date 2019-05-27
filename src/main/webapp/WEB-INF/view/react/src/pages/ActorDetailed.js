@@ -12,7 +12,7 @@ class ActorDetailed extends Component {
 
     componentDidMount() {
         const params = new URLSearchParams(window.location.search);
-        Axios.get('http://localhost:8080/api/person/findById?id=' + params.get("id"))
+        Axios.get('http://145.93.92.211:8080/api/person/findById?id=' + params.get("id"))
             .then(res => {
                 console.log(res);
                 const data = res.data;

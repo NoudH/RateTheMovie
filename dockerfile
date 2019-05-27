@@ -1,21 +1,8 @@
-FROM jimador/docker-jdk-8-maven-node:latest
-
-WORKDIR /node/
-COPY ./src/main/webapp/WEB-INF/view/react/ /node/
-ENV PATH /usr/src/app/node_modules/.bin:$PATH
-RUN npm install
-RUN npm run-script build
-
-RUN apt-get update && apt-get install -y apache2
-COPY ./src/main/webapp/WEB-INF/view/react/httpd.conf /usr/local/apache2/conf/httpd.conf
-RUN mkdir /usr/local/apache2/htdocs/
-RUN mv -v ./build/* /usr/local/apache2/htdocs/
-
+FROM maven:3.5.2-jdk-8
 WORKDIR /maven/
 COPY . /maven/
 RUN mvn compile
 RUN mvn package
-CMD /etc/init.d/apache2 restart
 CMD java -jar target/ratethemovie-0.0.1-SNAPSHOT.jar
 
 EXPOSE 80

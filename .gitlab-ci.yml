@@ -3,21 +3,53 @@ variables:
   MAVEN_CLI_OPTS: ""
 
 stages:
+  - build
   - deploy
 
 cache:
   paths:
     - .m2/repository/
     - target/
+
+build frontend:
+  stage: build
+  image: node:8
+  script:
+    - npm run-script build
+    - mv httpd.conf /build/
+    - mv dockerfile /build/
+    - mv .dockerignore /build/
+  artifacts:
+    untracked: true
+    paths:
+    - /build/
+    expire_in: 1 hour
+  only:
+    - /^master*$/
+  tags:
+    - node
     
-deploy RateTheMovie:
+deploy frontend:
+  stage: deploy
+  image: docker:latest
+  dependencies:
+    - build frontend
+  script:
+    - docker build -f dockerfile -t ratethemovie_fe:0.0.1 .
+    - docker run -d -p 0.0.0.0:80:80 --name rate_the_movie ratethemovie_fe:0.0.1
+  only:
+    - /^master*$/
+  tags:
+    - deploy
+  
+deploy backend:
   stage: deploy
   image: docker:stable
   before_script:
     - docker info
   script:
     - docker build -f dockerfile -t ratethemovie:0.0.1 .
-    - docker run -d -p 0.0.0.0:80:80 --name rate_the_movie ratethemovie:0.0.1
+    - docker run -d -p 0.0.0.0:8080:8080 --name rate_the_movie ratethemovie:0.0.1
   only:
     - /^master*$/
   tags:
