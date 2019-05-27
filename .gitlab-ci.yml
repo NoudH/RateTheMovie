@@ -24,7 +24,7 @@ build frontend:
     - mv .dockerignore ./build/
   artifacts:
     paths:
-    - ./build
+    - build/
     expire_in: 1 hour
   only:
     - /^master*$/
@@ -39,7 +39,7 @@ deploy frontend:
   script:
     - cd ./src/main/webapp/WEB-INF/view/react
     - docker build -f dockerfile -t ratethemovie_fe:0.0.1 .
-    - docker run -d -p 0.0.0.0:80:80 --name rate_the_movie ratethemovie_fe:0.0.1
+    - docker run -d -p 0.0.0.0:80:80 --name rate_the_movie_fe ratethemovie_fe:0.0.1
   only:
     - /^master*$/
   tags:
@@ -48,6 +48,7 @@ deploy frontend:
 deploy backend:
   stage: deploy
   image: docker:stable
+  dependencies: []
   before_script:
     - docker info
   script:
