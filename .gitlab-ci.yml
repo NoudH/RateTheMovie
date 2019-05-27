@@ -23,10 +23,9 @@ build frontend:
     - mv dockerfile ./build/
     - mv .dockerignore ./build/
   artifacts:
-    untracked: true
     paths:
-    - build/
-    expire_in: 5 minutes
+    - ./build/*
+    expire_in: 5 mins
   only:
     - /^master*$/
   tags:
