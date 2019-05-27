@@ -23,6 +23,7 @@ build frontend:
     - mv dockerfile ./build/
     - mv .dockerignore ./build/
   artifacts:
+    unchecked: true
     paths:
     - ./build
     expire_in: 1 hour
@@ -37,6 +38,7 @@ deploy frontend:
   dependencies:
     - build frontend
   script:
+    - cd ./src/main/webapp/WEB-INF/view/react
     - docker build -f dockerfile -t ratethemovie_fe:0.0.1 .
     - docker run -d -p 0.0.0.0:80:80 --name rate_the_movie ratethemovie_fe:0.0.1
   only:
