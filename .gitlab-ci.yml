@@ -16,11 +16,10 @@ build frontend:
   image: node:8
   script:
     - cd ./src/main/webapp/WEB-INF/view/react
-    - PATH=./node_modules/.bin:$PATH
     - npm run-script build
-    - mv httpd.conf /build/
-    - mv dockerfile /build/
-    - mv .dockerignore /build/
+    - mv httpd.conf ./build/
+    - mv dockerfile ./build/
+    - mv .dockerignore ./build/
   artifacts:
     untracked: true
     paths:
