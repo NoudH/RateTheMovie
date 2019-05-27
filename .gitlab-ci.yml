@@ -16,6 +16,7 @@ build frontend:
   image: node:8
   script:
     - cd ./src/main/webapp/WEB-INF/view/react
+    - npm install
     - npm run-script build
     - mv httpd.conf ./build/
     - mv dockerfile ./build/
