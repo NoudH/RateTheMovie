@@ -4,5 +4,4 @@ COPY . /maven/
 RUN mvn compile
 RUN mvn package
 CMD java -jar target/ratethemovie-0.0.1-SNAPSHOT.jar
-
-EXPOSE 80
+EXPOSE 8080
