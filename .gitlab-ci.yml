@@ -23,7 +23,6 @@ build frontend:
     - mv dockerfile ./build/
     - mv .dockerignore ./build/
   artifacts:
-    unchecked: true
     paths:
     - ./build
     expire_in: 1 hour
