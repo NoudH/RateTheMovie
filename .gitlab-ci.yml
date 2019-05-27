@@ -17,6 +17,7 @@ build frontend:
   script:
     - cd ./src/main/webapp/WEB-INF/view/react
     - npm install
+    - unset CI
     - npm run-script build
     - mv httpd.conf ./build/
     - mv dockerfile ./build/
