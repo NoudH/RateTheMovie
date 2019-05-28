@@ -56,6 +56,7 @@ public class UserController {
 
         user.setUserRole(UserRole.ROLE_USER);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setEnabled(true);
         userRepository.save(user);
 
         String token = jwtTokenProvider.createToken(user.getUsername(), Collections.singletonList(this.userRepository.findByUsername(user.getUsername()).getUserRole().toString()));
