@@ -33,7 +33,7 @@ public class MovieController {
         return movieRepository.findById(id);
     }
 
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @Secured({"ROLE_ADMIN"})
     @PostMapping(value = "/", consumes = "application/json", produces = "application/json")
     public Integer postMovie(@RequestBody Movie movie) {
         movie.setGenres(genreRepository.findByGenreIn(movie.getGenres().stream().map(GenreEntity::getGenre).collect(Collectors.toList())));

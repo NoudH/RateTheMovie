@@ -14,7 +14,7 @@ class NavigationBar extends Component {
                         <Nav.Link href="/">Home</Nav.Link>
                         <Nav.Link href="/browse">Browse</Nav.Link>
                         <Nav.Link href="/browseActors">Actors</Nav.Link>
-                        {window.sessionStorage.getItem("jwt") !== null ? <Nav.Link href="/addMovie">Add Movie</Nav.Link> : ""}
+                        {window.sessionStorage.getItem("jwt") !== null ? jwtDecoder(window.sessionStorage.getItem("jwt")).roles.includes("ROLE_ADMIN") ? <Nav.Link href="/addMovie">Add Movie</Nav.Link> : "" : ""}
                         {window.sessionStorage.getItem("jwt") !== null ? jwtDecoder(window.sessionStorage.getItem("jwt")).roles.includes("ROLE_ADMIN") ? <Nav.Link href="/addActor">Add Actor</Nav.Link> : "" : ""}
                     </Nav>
                 </Navbar.Collapse>
