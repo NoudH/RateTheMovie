@@ -11,7 +11,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.HtmlUtils;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,8 +37,6 @@ public class MovieController {
     @PostMapping(value = "/", consumes = "application/json", produces = "application/json")
     public Integer postMovie(@RequestBody Movie movie) {
         movie.setGenres(genreRepository.findByGenreIn(movie.getGenres().stream().map(GenreEntity::getGenre).collect(Collectors.toList())));
-        movie.setDescription(HtmlUtils.htmlEscape(movie.getDescription()));
-        movie.setTitle(HtmlUtils.htmlEscape(movie.getTitle()));
         return movieRepository.save(movie) != null ? 200 : 500;
     }
 
