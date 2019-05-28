@@ -7,6 +7,7 @@ import com.noudh.ratethemovie.orm.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.HtmlUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
@@ -31,6 +32,7 @@ public class ReviewController {
     @PostMapping(value = "/", consumes = "application/json", produces = "application/json")
     public Integer postReview(@RequestBody Review review, @RequestParam Long movieid, Principal principal){
         review.setDate(new Date());
+        review.setComment(HtmlUtils.htmlEscape(review.getComment()));
         review.setUser(userRepository.findByUsername(principal.getName()));
         review.setMovie(movieRepository.findById(movieid).orElseThrow(NullPointerException::new));
         return reviewRepository.save(review) != null ? 200 : 500;

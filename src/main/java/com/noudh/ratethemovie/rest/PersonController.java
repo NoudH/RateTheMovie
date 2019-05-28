@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.HtmlUtils;
 
 import java.util.Optional;
 
@@ -29,6 +30,8 @@ public class PersonController {
     @Secured({"ROLE_ADMIN"})
     @PostMapping(value = "/", consumes = "application/json", produces = "application/json")
     public Integer postPerson(@RequestBody Person person){
+        person.setDescription(HtmlUtils.htmlEscape(person.getDescription()));
+        person.setName(HtmlUtils.htmlEscape(person.getName()));
         return personRepository.save(person) != null ? 200 : 500;
     }
 
