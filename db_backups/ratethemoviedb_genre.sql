@@ -1,0 +1,14 @@
+INSERT INTO ratethemoviedb.genre (id, genre) VALUES (7, 'THRILLER');
+INSERT INTO ratethemoviedb.genre (id, genre) VALUES (11, 'WAR');
+INSERT INTO ratethemoviedb.genre (id, genre) VALUES (8, 'ADVENTURE');
+INSERT INTO ratethemoviedb.genre (id, genre) VALUES (9, 'CYBERPUNK');
+INSERT INTO ratethemoviedb.genre (id, genre) VALUES (10, 'SCI_FI');
+INSERT INTO ratethemoviedb.genre (id, genre) VALUES (13, 'SPACE');
+INSERT INTO ratethemoviedb.genre (id, genre) VALUES (12, 'ACTION');
+INSERT INTO ratethemoviedb.genre (id, genre) VALUES (14, 'CRIME');
+INSERT INTO ratethemoviedb.genre (id, genre) VALUES (15, 'HORROR');
+INSERT INTO ratethemoviedb.genre (id, genre) VALUES (16, 'COMEDY');
+INSERT INTO ratethemoviedb.genre (id, genre) VALUES (17, 'MEDIEVAL');
+INSERT INTO ratethemoviedb.genre (id, genre) VALUES (18, 'FANTASY');
+INSERT INTO ratethemoviedb.genre (id, genre) VALUES (19, 'HISTORICAL');
+INSERT INTO ratethemoviedb.genre (id, genre) VALUES (20, 'ROMANCE');

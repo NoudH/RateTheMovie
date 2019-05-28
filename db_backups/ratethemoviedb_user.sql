@@ -1,0 +1,2 @@
+INSERT INTO ratethemoviedb.user (id, enabled, password, user_role, username) VALUES (1, true, '$2a$10$slhK9HNKMEALenxZqzgBaeft7boAG6BxU5G1fV14uDakUqXC.IUyq', 'ROLE_ADMIN', 'admin');
+INSERT INTO ratethemoviedb.user (id, enabled, password, user_role, username) VALUES (3, true, '$2a$10$MbZiwbCTVz/VVHB286WwN.NtxtcEYerDdLtMSxf6MUOlD4Rcfdm8S', 'ROLE_USER', 'user');
