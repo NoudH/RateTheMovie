@@ -13,7 +13,7 @@ class MovieDetailed extends Component {
 
     componentDidMount() {
         const params = new URLSearchParams(window.location.search);
-        Axios.get('http://145.93.92.211:8080/api/movie/?id=' + params.get("id"))
+        Axios.get('http://localhost:8080/api/movie/?id=' + params.get("id"))
             .then(res => {
                 console.log(res);
                 const movieData = res.data;
@@ -26,7 +26,7 @@ class MovieDetailed extends Component {
             return;
         }
         const params = new URLSearchParams(window.location.search);
-        Axios.post('http://145.93.92.211:8080/api/review/?movieid=' + params.get("id"), {
+        Axios.post('http://localhost:8080/api/review/?movieid=' + params.get("id"), {
             rating: this.state.rating,
             comment: this.state.comment
         }, {

@@ -13,7 +13,7 @@ class BrowseActors extends Component {
     }
 
     componentDidMount() {
-        Axios.get('http://145.93.92.211:8080/api/person/?page=' + (this.state.page - 1)  + '&size=20')
+        Axios.get('http://localhost:8080/api/person/?page=' + (this.state.page - 1)  + '&size=20')
             .then(res => {
                 console.log(res);
                 const data = res.data;
@@ -22,7 +22,7 @@ class BrowseActors extends Component {
     }
 
     findActors(){
-        Axios.get('http://145.93.92.211:8080/api/person/findByName?page=' + (this.state.page - 1) + '&size=20&name=' + this.state.name)
+        Axios.get('http://localhost:8080/api/person/findByName?page=' + (this.state.page - 1) + '&size=20&name=' + this.state.name)
             .then(res => {
                 console.log(res);
                 const data = res.data;

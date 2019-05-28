@@ -12,14 +12,14 @@ class AddMovie extends Component {
     }
 
     componentDidMount() {
-        Axios.get('http://145.93.92.211:8080/api/person/?page=0&size=10')
+        Axios.get('http://localhost:8080/api/person/?page=0&size=10')
             .then(res => {
                 console.log(res);
                 const data = res.data;
                 this.setState({actorData: data.content, lastPage: data.totalPages});
             });
 
-        Axios.get('http://145.93.92.211:8080/api/genre')
+        Axios.get('http://localhost:8080/api/genre')
             .then(res => {
                 console.log(res);
                 const data = res.data;
@@ -28,7 +28,7 @@ class AddMovie extends Component {
     }
 
     findActorByName = () => {
-        Axios.get('http://145.93.92.211:8080/api/person/searchByName?name=' + this.state.name + '&page=' + (this.state.page - 1) + '&size=10')
+        Axios.get('http://localhost:8080/api/person/searchByName?name=' + this.state.name + '&page=' + (this.state.page - 1) + '&size=10')
             .then(res => {
                 console.log(res);
                 const data = res.data;
@@ -70,7 +70,7 @@ class AddMovie extends Component {
     }
 
     postMovie = () => {
-        Axios.post('http://145.93.92.211:8080/api/movie/', {
+        Axios.post('http://localhost:8080/api/movie/', {
             title: this.state.title,
             releaseYear: this.state.releaseYear,
             trailerUrl: this.state.trailerUrl,

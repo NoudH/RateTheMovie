@@ -13,14 +13,14 @@ class BrowseMovies extends Component {
     }
 
     componentDidMount() {
-        Axios.get('http://145.93.92.211:8080/api/movie/all?page=0&size=20')
+        Axios.get('http://localhost:8080/api/movie/all?page=0&size=20')
             .then(res => {
                 console.log(res);
                 const movieData = res.data.content;
                 this.setState({movies: movieData});
             });
 
-        Axios.get('http://145.93.92.211:8080/api/genre')
+        Axios.get('http://localhost:8080/api/genre')
             .then(res => {
                 console.log(res);
                 const data = res.data;
@@ -29,7 +29,7 @@ class BrowseMovies extends Component {
     }
 
     browseMovies(){
-        Axios.get('http://145.93.92.211:8080/api/movie/browse?page=' + (this.state.page - 1) + '&size=20&title='+ this.state.title + "&rating=" + this.state.rating + "&year=" + this.state.releaseYear + "&genre=" + this.state.genre)
+        Axios.get('http://localhost:8080/api/movie/browse?page=' + (this.state.page - 1) + '&size=20&title='+ this.state.title + "&rating=" + this.state.rating + "&year=" + this.state.releaseYear + "&genre=" + this.state.genre)
             .then(res => {
                 console.log(res);
                 const data = res.data;

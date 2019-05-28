@@ -14,7 +14,7 @@ class App extends Component {
 
 
   componentDidMount() {
-    Axios.get('http://145.93.92.211:8080/api/movie/all?page=0&size=20')
+    Axios.get('http://localhost:8080/api/movie/all?page=0&size=20')
         .then(res => {
             console.log(res);
             const movieData = res.data.content;

@@ -10,7 +10,7 @@ class SignUp extends Component {
     }
 
     registerUser() {
-        Axios.post('http://145.93.92.211:8080/api/user/register', {
+        Axios.post('http://localhost:8080/api/user/register', {
             username: this.state.username,
             password: this.state.password
         })

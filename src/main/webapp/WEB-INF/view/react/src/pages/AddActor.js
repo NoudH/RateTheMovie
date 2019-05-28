@@ -13,7 +13,7 @@ class AddActor extends Component {
     }
 
     postActor = () => {
-        Axios.post('http://145.93.92.211:8080/api/person/', {
+        Axios.post('http://localhost:8080/api/person/', {
             name: this.state.name,
             dateOfBirth: this.state.dateOfBirth,
             imageUrl: this.state.imageUrl,
