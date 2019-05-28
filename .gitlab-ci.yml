@@ -37,6 +37,7 @@ deploy frontend:
   dependencies:
     - build frontend
   script:
+    - docker rm -f rate_the_movie_fe 2>/dev/null || true
     - cd ./src/main/webapp/WEB-INF/view/react/build
     - docker build -f dockerfile -t ratethemovie_fe:0.0.1 .
     - docker run -d -p 0.0.0.0:80:80 --name rate_the_movie_fe ratethemovie_fe:0.0.1
@@ -52,6 +53,7 @@ deploy backend:
   before_script:
     - docker info
   script:
+    - docker rm -f rate_the_movie 2>/dev/null || true
     - docker build -f dockerfile -t ratethemovie:0.0.1 .
     - docker run -d -p 0.0.0.0:8080:8080 --name rate_the_movie ratethemovie:0.0.1
   only:
