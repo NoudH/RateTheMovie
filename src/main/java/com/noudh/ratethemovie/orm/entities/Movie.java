@@ -1,8 +1,6 @@
 package com.noudh.ratethemovie.orm.entities;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.List;
@@ -27,7 +25,6 @@ public class Movie {
     private Integer releaseYear;
 
     @OneToMany(mappedBy = "movie")
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     private List<Review> reviews;
 
     @ManyToOne
@@ -141,4 +138,5 @@ public class Movie {
     public void setDescription(String description) {
         this.description = description;
     }
+
 }
