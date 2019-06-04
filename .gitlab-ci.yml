@@ -18,7 +18,7 @@ test frontend:
   script:
     - cd ./src/main/webapp/WEB-INF/view/react
     - npm install
-    - jest
+    - npm run-script test
   tags:
     - node
 
