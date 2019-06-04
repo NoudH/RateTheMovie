@@ -27,7 +27,7 @@ it('should get the movie data', () => {
         .then(thenFn)
         .catch(catchFn);
 
-    expect(mockAxios.get).toHaveBeenCalledWith('http://localhost:8080/api/movie/all?page=' + page + '&size=' + size);
+    expect(mockAxios.get).toHaveBeenCalledWith('http://localhost:8080/api/movies/all?page=' + page + '&size=' + size);
 
     let responseObj = { data: {content: 'movie object'} };
     mockAxios.mockResponse(responseObj);
@@ -52,7 +52,7 @@ it('should get the movie data from browse endpoint', () => {
         .then(thenFn)
         .catch(catchFn);
 
-    expect(mockAxios.get).toHaveBeenCalledWith('http://localhost:8080/api/movie/browse?page=' + page + '&size=' + size + '&title='+ title + "&rating=" + rating + "&year=" + year + "&genre=" + genre);
+    expect(mockAxios.get).toHaveBeenCalledWith('http://localhost:8080/api/movies/browses?page=' + page + '&size=' + size + '&title='+ title + "&rating=" + rating + "&year=" + year + "&genre=" + genre);
 
     let responseObj = { data: 'movie object' };
     mockAxios.mockResponse(responseObj);

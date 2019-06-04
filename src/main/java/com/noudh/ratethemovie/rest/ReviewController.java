@@ -15,7 +15,7 @@ import java.security.Principal;
 import java.util.Date;
 
 @RestController
-@RequestMapping("/api/review")
+@RequestMapping("/api/reviews")
 public class ReviewController {
 
     private final UserRepository userRepository;

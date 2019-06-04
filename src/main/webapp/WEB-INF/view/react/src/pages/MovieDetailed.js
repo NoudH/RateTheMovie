@@ -24,7 +24,7 @@ class MovieDetailed extends Component {
             return;
         }
         const params = new URLSearchParams(window.location.search);
-        Axios.post('http://localhost:8080/api/review/?movieid=' + params.get("id"), {
+        Axios.post('http://localhost:8080/api/reviews/?movieid=' + params.get("id"), {
             rating: this.state.rating,
             comment: this.state.comment
         }, {

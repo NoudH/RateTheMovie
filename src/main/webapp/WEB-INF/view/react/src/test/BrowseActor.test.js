@@ -29,7 +29,7 @@ it('should get the actor data', () => {
         .then(thenFn)
         .catch(catchFn);
 
-    expect(mockAxios.get).toHaveBeenCalledWith('http://localhost:8080/api/person/?page=' + page  + '&size=' + size);
+    expect(mockAxios.get).toHaveBeenCalledWith('http://localhost:8080/api/persons/?page=' + page  + '&size=' + size);
 
     let responseObj = { data: {content: 'movie object'} };
     mockAxios.mockResponse(responseObj);
@@ -51,7 +51,7 @@ it('should get the actor data with name', () => {
         .then(thenFn)
         .catch(catchFn);
 
-    expect(mockAxios.get).toHaveBeenCalledWith('http://localhost:8080/api/person/findByName?name=' + name + "&page=" + page + "&size=" + size);
+    expect(mockAxios.get).toHaveBeenCalledWith('http://localhost:8080/api/persons/findByName?name=' + name + "&page=" + page + "&size=" + size);
 
     let responseObj = { data: 'movie object' };
     mockAxios.mockResponse(responseObj);

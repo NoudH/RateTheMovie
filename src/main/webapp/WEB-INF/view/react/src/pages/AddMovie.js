@@ -3,6 +3,9 @@ import "./css/AddMovie.css"
 import NavigationBar from "../components/NavigationBar";
 import Axios from "axios";
 import PageControls from "../components/PageControls";
+import FindActorByName from "../api/FindActorByName";
+import GetAllActors from "../api/GetAllActors";
+import GetAllGenres from "../api/GetAllGenres";
 
 class AddMovie extends Component {
 
@@ -12,26 +15,20 @@ class AddMovie extends Component {
     }
 
     componentDidMount() {
-        Axios.get('http://localhost:8080/api/person/?page=0&size=10')
-            .then(res => {
-                console.log(res);
-                const data = res.data;
+        GetAllActors(0, 10)
+            .then(data => {
                 this.setState({actorData: data.content, lastPage: data.totalPages});
             });
 
-        Axios.get('http://localhost:8080/api/genre')
-            .then(res => {
-                console.log(res);
-                const data = res.data;
+        GetAllGenres()
+            .then(data => {
                 this.setState({genres: data});
             });
     }
 
     findActorByName = () => {
-        Axios.get('http://localhost:8080/api/person/searchByName?name=' + this.state.name + '&page=' + (this.state.page - 1) + '&size=10')
-            .then(res => {
-                console.log(res);
-                const data = res.data;
+        FindActorByName(this.state.name, this.state.page - 1, 10)
+            .then(data => {
                 this.setState({actorData: data.content, lastPage: data.totalPages});
             });
     };
@@ -70,7 +67,7 @@ class AddMovie extends Component {
     }
 
     postMovie = () => {
-        Axios.post('http://localhost:8080/api/movie/', {
+        Axios.post('http://localhost:8080/api/movies/', {
             title: this.state.title,
             releaseYear: this.state.releaseYear,
             trailerUrl: this.state.trailerUrl,

@@ -2,7 +2,7 @@ import Axios from 'axios';
 
 const GetAllGenres = () => {
 
-    let promise = Axios.get('http://localhost:8080/api/genre');
+    let promise = Axios.get('http://localhost:8080/api/genres');
     promise.then(res => console.log(res));
     promise = promise.then(res =>
         res.data

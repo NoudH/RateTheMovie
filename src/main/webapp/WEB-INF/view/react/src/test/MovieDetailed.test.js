@@ -25,7 +25,7 @@ it('should get the movie data', () => {
         .then(thenFn)
         .catch(catchFn);
 
-    expect(mockAxios.get).toHaveBeenCalledWith('http://localhost:8080/api/movie/?id=1');
+    expect(mockAxios.get).toHaveBeenCalledWith('http://localhost:8080/api/movies/?id=1');
 
     let responseObj = { data: 'movie object' };
     mockAxios.mockResponse(responseObj);

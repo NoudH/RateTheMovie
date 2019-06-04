@@ -19,7 +19,7 @@ const inputs = [{
 const props = {
     name: 'loginForm',
     method: 'POST',
-    action: 'http://localhost:8080/api/user/login',
+    action: 'http://localhost:8080/api/users/login',
     inputs: inputs
 };
 
