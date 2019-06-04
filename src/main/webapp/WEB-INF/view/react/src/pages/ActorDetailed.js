@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import NavigationBar from "../components/NavigationBar";
 import Axios from "axios";
 import MovieList from "../components/MovieList";
+import FindActorById from "../api/FindActorById";
 
 class ActorDetailed extends Component {
 
@@ -12,13 +13,11 @@ class ActorDetailed extends Component {
 
     componentDidMount() {
         const params = new URLSearchParams(window.location.search);
-        Axios.get('http://localhost:8080/api/person/findById?id=' + params.get("id"))
-            .then(res => {
-                console.log(res);
-                const data = res.data;
-                this.setState({actor: data});
-            });
+        FindActorById(params.get("id")).then( data => {
+            this.setState({actor: data});
+        })
     }
+
     render() {
         return (
             <div>

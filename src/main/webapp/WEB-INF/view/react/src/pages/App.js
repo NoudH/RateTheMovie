@@ -4,6 +4,7 @@ import MovieList from "../components/MovieList";
 import Axios from "axios"
 import NavigationBar from "../components/NavigationBar";
 import 'bootstrap/dist/css/bootstrap.css';
+import GetAllMovies from "../api/GetAllMovies";
 
 class App extends Component {
 
@@ -14,12 +15,9 @@ class App extends Component {
 
 
   componentDidMount() {
-    Axios.get('http://localhost:8080/api/movie/all?page=0&size=20')
-        .then(res => {
-            console.log(res);
-            const movieData = res.data.content;
-            this.setState({ movies: movieData });
-        });
+      GetAllMovies(0, 20).then( data =>
+          this.setState({movies: data.content})
+      );
   }
 
   render() {

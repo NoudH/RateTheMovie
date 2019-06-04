@@ -4,6 +4,8 @@ import Axios from "axios";
 import ActorBig from "../components/ActorBig";
 import "./css/BrowseActors.css"
 import PageControls from "../components/PageControls";
+import GetAllActors from "../api/GetAllActors";
+import FindActorByName from "../api/FindActorByName";
 
 class BrowseActors extends Component {
 
@@ -13,19 +15,15 @@ class BrowseActors extends Component {
     }
 
     componentDidMount() {
-        Axios.get('http://localhost:8080/api/person/?page=' + (this.state.page - 1)  + '&size=20')
-            .then(res => {
-                console.log(res);
-                const data = res.data;
+        GetAllActors(this.state.page - 1, 20)
+            .then(data => {
                 this.setState({actors: data.content, lastPage: data.totalPages});
             });
     }
 
     findActors(){
-        Axios.get('http://localhost:8080/api/person/findByName?page=' + (this.state.page - 1) + '&size=20&name=' + this.state.name)
-            .then(res => {
-                console.log(res);
-                const data = res.data;
+        FindActorByName(this.state.name, this.state.page - 1, 20)
+            .then(data => {
                 this.setState({actors: data.content, lastPage: data.totalPages});
             });
     }

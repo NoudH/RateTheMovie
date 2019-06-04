@@ -4,6 +4,9 @@ import MovieList from "../components/MovieList";
 import "./css/BrowseMovies.css"
 import Axios from "axios";
 import PageControls from "../components/PageControls";
+import GetAllMovies from "../api/GetAllMovies";
+import GetAllGenres from "../api/GetAllGenres";
+import BrowseForMovies from "../api/BrowseForMovies";
 
 class BrowseMovies extends Component {
 
@@ -13,26 +16,18 @@ class BrowseMovies extends Component {
     }
 
     componentDidMount() {
-        Axios.get('http://localhost:8080/api/movie/all?page=0&size=20')
-            .then(res => {
-                console.log(res);
-                const movieData = res.data.content;
-                this.setState({movies: movieData});
-            });
+        GetAllMovies(0, 20).then( data =>
+            this.setState({movies: data.content})
+        );
 
-        Axios.get('http://localhost:8080/api/genre')
-            .then(res => {
-                console.log(res);
-                const data = res.data;
-                this.setState({genres: data});
-            });
+        GetAllGenres().then(data =>
+            this.setState({genres: data})
+        );
     }
 
     browseMovies(){
-        Axios.get('http://localhost:8080/api/movie/browse?page=' + (this.state.page - 1) + '&size=20&title='+ this.state.title + "&rating=" + this.state.rating + "&year=" + this.state.releaseYear + "&genre=" + this.state.genre)
-            .then(res => {
-                console.log(res);
-                const data = res.data;
+        BrowseForMovies(this.state.title, this.state.rating, this.state.releaseYear,  this.state.genre, this.state.page - 1, 20)
+            .then(data => {
                 this.setState({movies: data.content, lastPage: data.totalPages});
             });
     }

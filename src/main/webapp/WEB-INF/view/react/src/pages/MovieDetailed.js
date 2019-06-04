@@ -4,6 +4,7 @@ import NavigationBar from "../components/NavigationBar";
 import Comment from "../components/Comment";
 import './css/MovieDetailed.css'
 import Actor from "../components/Actor";
+import FindMovieById from "../api/FindMovieById";
 
 class MovieDetailed extends Component {
     constructor(props) {
@@ -13,12 +14,9 @@ class MovieDetailed extends Component {
 
     componentDidMount() {
         const params = new URLSearchParams(window.location.search);
-        Axios.get('http://localhost:8080/api/movie/?id=' + params.get("id"))
-            .then(res => {
-                console.log(res);
-                const movieData = res.data;
-                this.setState({movie: movieData});
-            });
+        FindMovieById(params.get("id")).then(data => {
+            this.setState({movie: data});
+        });
     }
 
     postComment = () => {
