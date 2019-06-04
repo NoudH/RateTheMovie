@@ -3,6 +3,7 @@ variables:
   MAVEN_CLI_OPTS: ""
 
 stages:
+  - test
   - build
   - deploy
 
@@ -10,6 +11,16 @@ cache:
   paths:
     - .m2/repository/
     - target/
+
+test frontend:
+  stage: test
+  image: node:8
+  script:
+    - cd ./src/main/webapp/WEB-INF/view/react
+    - npm install
+    - jest
+  tags:
+    - node
 
 build frontend:
   stage: build
