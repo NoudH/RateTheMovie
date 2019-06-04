@@ -18,7 +18,8 @@ test backend:
   script:
     - mvn test
   tags:
-    - mvn, jdk-8
+    - mvn
+    - jdk-8
 
 test frontend:
   stage: test
