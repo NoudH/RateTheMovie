@@ -17,6 +17,11 @@ test backend:
   image: maven:3.5.2-jdk-8
   script:
     - mvn test
+  artifacts:
+    reports:
+      junit:
+        - target/surefire-reports/TEST-*.xml
+        - target/failsafe-reports/TEST-*.xml
   tags:
     - mvn
     - jdk-8
@@ -28,6 +33,12 @@ test frontend:
     - cd ./src/main/webapp/WEB-INF/view/react
     - npm install
     - npm run-script test
+  artifacts:
+    reports:
+      junit:
+        - ./src/main/webapp/WEB-INF/view/react/junit.xml
+      coverage:
+        - ./src/main/webapp/WEB-INF/view/react/coverage
   tags:
     - node
 
