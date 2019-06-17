@@ -19,6 +19,8 @@ test backend:
     - mvn test
   artifacts:
     expire_in: 5 hours
+    paths:
+        - target/*-reports/TEST-*.xml
     reports:
       junit:
         - target/surefire-reports/TEST-*.xml
