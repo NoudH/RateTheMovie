@@ -40,6 +40,7 @@ test frontend:
     expire_in: 5 hours
     paths:
       - ./src/main/webapp/WEB-INF/view/react/coverage/*
+      - ./src/main/webapp/WEB-INF/view/react/junit.xml
     reports:
       junit:
         - ./src/main/webapp/WEB-INF/view/react/junit.xml
