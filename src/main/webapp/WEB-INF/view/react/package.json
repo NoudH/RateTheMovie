@@ -18,7 +18,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "./node_modules/.bin/react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --coverage --reporters=default --reporters=jest-junit",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -31,6 +31,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "jest-junit": "^6.4.0",
     "jest-mock-axios": "^3.0.0"
   }
 }
