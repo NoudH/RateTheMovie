@@ -18,6 +18,7 @@ test backend:
   script:
     - mvn test
   artifacts:
+    expire_in: 5 hours
     reports:
       junit:
         - target/surefire-reports/TEST-*.xml
@@ -38,7 +39,7 @@ test frontend:
     reports:
       junit:
         - ./src/main/webapp/WEB-INF/view/react/junit.xml
-        - ./src/main/webapp/WEB-INF/view/react/coverage
+        - ./src/main/webapp/WEB-INF/view/react/coverage/*
   tags:
     - node
 
