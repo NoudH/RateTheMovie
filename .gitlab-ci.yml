@@ -37,7 +37,7 @@ test frontend:
     reports:
       junit:
         - ./src/main/webapp/WEB-INF/view/react/junit.xml
-      coverage:
+      metrics:
         - ./src/main/webapp/WEB-INF/view/react/coverage
   tags:
     - node
