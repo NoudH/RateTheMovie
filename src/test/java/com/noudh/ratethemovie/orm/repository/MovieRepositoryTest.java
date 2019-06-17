@@ -16,7 +16,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 
 @RunWith(SpringRunner.class)
@@ -44,13 +43,15 @@ public class MovieRepositoryTest {
                 "test imageUrl",
                 "test description",
                 2019,
-                Collections.singletonList(new Review(4, null, null, "comment", new Date())),
+                null,
                 null,
                 null,
                 null,
                 Arrays.asList(genreRepository.findByGenre(Genre.ACTION), genreRepository.findByGenre(Genre.ADVENTURE))
         );
-        entityManager.persist(movie);
+        movie = entityManager.persist(movie);
+        Review review = new Review(4, null, movie, "comment", new Date());
+        entityManager.persist(review);
         entityManager.flush();
 
     }
@@ -64,22 +65,6 @@ public class MovieRepositoryTest {
 
 
     @Test
-    @Ignore
-    /** FindByRating works, but not during tests
-     *  Possible reasons:
-     *
-     *      - The movie does not exists
-     *          false: movieRepository.findAll() does return the movie.
-     *
-     *      - The movie does not have reviews
-     *          false: movieRepository.findAll() shows there are reviews.
-     *
-     *      - The movieRepository.findByRating() function is broken
-     *          false: movieRepository.findByRating() does work in production.
-     *
-     *      - H2 Interprets the SQL query differently than MySQL resulting in different results
-     *          possible, but I don't how to fix it (if it can be fixed).
-     */
     public void findByRating() {
         Assert.assertTrue(movieRepository.findByRating(4D, Pageable.unpaged()).getTotalElements() > 0);
         Assert.assertTrue(movieRepository.findByRating(2D, Pageable.unpaged()).getTotalElements() > 0);
